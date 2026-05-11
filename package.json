@@ -3,21 +3,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "build": "vite build",
+    "dev": "vite",
+    "start": "vite preview",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@react-router/node": "7.14.0",
-    "@react-router/serve": "7.14.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.1045.0",
     "isbot": "^5.1.36",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router": "7.14.0"
   },
   "devDependencies": {
-    "@react-router/dev": "7.14.0",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22",
     "@types/react": "^19.2.14",
