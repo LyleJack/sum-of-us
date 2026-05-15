@@ -16,6 +16,8 @@ export const styles = {
     action: "action-link",
   },
   welcome: {
+    background: "welcome-background",
+    backgroundImage: "welcome-background-image",
     header: "welcome-header",
     titleBox: "welcome-title-box",
     actions: "welcome-actions",

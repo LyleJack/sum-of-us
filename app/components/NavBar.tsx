@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { useAwsAuth } from "./AwsAuth";
 import { useAuthModal } from "./AuthModal";
-import logoDark from "../placeholder_icon.png";
-import logoLight from "../placeholder_icon.png";
+import logoDark from "../sum-of-us-logo.svg";
+import logoLight from "../sum-of-us-logo.svg";
 import { styles } from "../styles";
 import {
   colorSchemeNames,
@@ -29,9 +29,6 @@ export function NavBar() {
                 className="h-8 w-auto"
               />
             </Link>
-            <span className={styles.nav.user}>
-              {displayName ? `Welcome, ${displayName}` : "Sum Of Us"}
-            </span>
           </div>
 
           {/* Center: Navigation Links */}
@@ -86,7 +83,7 @@ export function NavBar() {
                 Login
               </button>
             )}
-            <select
+            {/* <select
               aria-label="Color scheme"
               className={styles.nav.schemeSelect}
               onChange={(event) =>
@@ -98,8 +95,8 @@ export function NavBar() {
                 <option key={name} value={name}>
                   {name}
                 </option>
-              ))}
-            </select>
+              ))} 
+            </select>*/}
           </div>
         </div>
       </div>

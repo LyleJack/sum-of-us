@@ -30,6 +30,8 @@ export function useAuthModal() {
   return context;
 }
 
+// TODO: Hook into DB add on successful user signup to add the details to the DB too 
+
 export function AuthModalProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<AuthMode>("login");
   const [isOpen, setIsOpen] = useState(false);
