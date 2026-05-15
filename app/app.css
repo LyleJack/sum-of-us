@@ -72,6 +72,23 @@ body {
   color: var(--text);
 }
 
+.welcome-page {
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+  width: 100%;
+  padding-bottom: 0;
+  overflow-x: hidden;
+  background: #f1e7e2;
+  color: #2c2827;
+}
+
+.welcome-stack {
+  width: 100%;
+  align-items: stretch;
+  gap: 0;
+}
+
 .welcome-header {
   display: flex;
   flex-direction: column;
@@ -81,25 +98,22 @@ body {
 
 .welcome-background {
   position: relative;
+  width: 100%;
+  min-height: 44rem;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.18)),
+    var(--welcome-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@media (width >= 48rem) {
-  .welcome-background {
-    width: 100vw;
-    height: 90vh;
-    overflow: hidden;
-    background-image: var(--welcome-background-image);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  .welcome-background-image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.welcome-background-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .welcome-title-box {
@@ -123,6 +137,258 @@ body {
 .welcome-prompt {
   text-align: center;
   line-height: 1.5rem;
+}
+
+.welcome-class-meta {
+  position: absolute;
+  bottom: 29%;
+  left: clamp(1.25rem, 5vw, 8rem);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 2vw, 2.25rem);
+  color: #f1e7e2;
+  font-size: clamp(0.75rem, 1.65vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.06;
+}
+
+.welcome-class-meta p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.welcome-class-logo {
+  position: absolute;
+  bottom: 4%;
+  left: clamp(1.25rem, 5vw, 8rem);
+  width: min(88vw, 1313px);
+  max-height: 25%;
+}
+
+.welcome-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  background: #f1e7e2;
+  padding: clamp(3rem, 6vw, 4.75rem) clamp(1.25rem, 5vw, 8rem);
+}
+
+.welcome-intro-title,
+.welcome-feature-card h2 {
+  max-width: 12ch;
+  color: #3a3532;
+  font-size: clamp(2rem, 5.1vw, 4.9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.welcome-intro-copy {
+  max-width: 45rem;
+  color: #3a3532;
+  font-size: clamp(1.45rem, 2.35vw, 2.45rem);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.welcome-intro-copy p {
+  margin: 0 0 2rem;
+}
+
+.welcome-text-link {
+  color: #6d6865;
+  font-size: clamp(0.875rem, 1.1vw, 1.125rem);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.welcome-photo-banner {
+  display: block;
+  width: 100%;
+  height: clamp(18rem, 33vw, 42rem);
+  object-fit: cover;
+  object-position: center;
+}
+
+.welcome-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #f1e7e2;
+}
+
+.welcome-feature-card {
+  min-height: clamp(19rem, 28vw, 36rem);
+  padding: clamp(2rem, 4.4vw, 4rem) clamp(1.25rem, 5vw, 8rem);
+}
+
+.welcome-feature-card:nth-child(3) {
+  background: #faf7f2;
+}
+
+.welcome-feature-card h2 {
+  margin: 0 0 clamp(3rem, 6vw, 6.5rem);
+  max-width: 12ch;
+  font-size: clamp(2rem, 3.2vw, 3.6rem);
+  text-transform: none;
+}
+
+.welcome-feature-card p {
+  max-width: 50rem;
+  margin: 0;
+  color: #3a3532;
+  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.welcome-feature-card p + p {
+  margin-top: 1.25rem;
+}
+
+.welcome-feature-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: clamp(18rem, 28vw, 36rem);
+  object-fit: cover;
+}
+
+.welcome-join-banner {
+  display: flex;
+  gap: clamp(0.85rem, 1.8vw, 1.5rem);
+  overflow: hidden;
+  background: var(--accent);
+  padding: 0.55rem 0;
+  color: #2c2827;
+  white-space: nowrap;
+  font-weight: 800;
+  font-style: Extra Bold;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 2%;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+}
+
+.welcome-join-banner span {
+  flex: 0 0 auto;
+}
+
+.welcome-text-link:hover,
+.footer a:hover {
+  color: var(--accent);
+}
+
+.welcome-join-banner:hover {
+  background: var(--accent-hover);
+}
+
+.footer {
+  overflow: hidden;
+  background: #2c2827;
+  padding: clamp(2rem, 3vw, 3rem) clamp(1.25rem, 5vw, 6rem) 1.4rem;
+  color: #f1e7e2;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  vertical-align: bottom;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0%;
+  text-decoration-skip-ink: auto;
+
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: normal;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer-venue {
+  position: absolute;
+  margin-top: 0rem;
+  left: 40vh;
+  line-height: normal;
+}
+
+.footer-venue a {
+  position: inherit;
+  color: var(--accent);
+  margin-top: 1rem;
+}
+
+.footer-social {
+   position: absolute;
+  margin-top: 0rem;
+  right: 10vh;
+  color: var(--accent);
+}
+
+.footer-social div {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.footer-logo {
+  display: block;
+  width: 100%;
+  margin-top: clamp(1.25rem, 2vw, 2rem);
+  filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(329%) hue-rotate(319deg) brightness(107%) contrast(98%);
+}
+
+@media (width >= 48rem) {
+  .welcome-background {
+    min-height: 90vh;
+  }
+
+  .welcome-intro {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .welcome-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .welcome-footer-content {
+    grid-template-columns: 1fr 1.3fr auto;
+  }
+}
+
+@media (width < 48rem) {
+  .welcome-class-meta {
+    bottom: 24%;
+    flex-direction: column;
+  }
+
+  .welcome-class-logo {
+    bottom: 6%;
+  }
 }
 
 .resource-icon {
