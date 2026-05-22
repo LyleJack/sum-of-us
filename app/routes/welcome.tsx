@@ -88,7 +88,7 @@ export function Welcome() {
           </article>
           <img
             src={beachPhoto}
-            alt="Friends walking together by the water"
+            alt="Community focused self-defence classes in Glasgow"
             className={styles.welcome.featureImage}
           />
         </section>

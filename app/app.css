@@ -116,6 +116,26 @@ body {
   object-fit: cover;
 }
 
+.generic-background {
+  position: relative;
+  width: 100%;
+  min-height: 30rem;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.18)),
+    var(--generic-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.generic-background-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .welcome-title-box {
   width: 500px;
   max-width: 100vw;
@@ -330,7 +350,7 @@ body {
 .footer-venue {
   position: absolute;
   margin-top: 0rem;
-  left: 40vh;
+  left: clamp(20vw, 40vh, 45vh);
   line-height: normal;
 }
 
@@ -362,7 +382,7 @@ body {
   filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(329%) hue-rotate(319deg) brightness(107%) contrast(98%);
 }
 
-@media (width >= 48rem) {
+ @media (width >= 48rem) {
   .welcome-background {
     min-height: 90vh;
   }
@@ -389,7 +409,7 @@ body {
   .welcome-class-logo {
     bottom: 6%;
   }
-}
+} 
 
 .resource-icon {
   width: 1.25rem;
@@ -427,7 +447,7 @@ body {
   border-radius: var(--radius-pill);
   background: var(--accent);
   padding: 0.5rem 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent-contrast);
 }
 
@@ -436,7 +456,7 @@ body {
 }
 
 .primary-button-small {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.25rem;
 }
 
@@ -457,11 +477,16 @@ body {
 }
 
 .site-nav-link {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  padding: 0.5rem 0.1rem;
+  font-size: 1rem;
   line-height: 1.25rem;
-  color: var(--text);
+  color: var(--accent);
+  background-color: #2C2827;
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 2rem;
+  font-weight: 600;
+  font-style: Semi Bold;
+  text-align: center;
 }
 
 .site-nav-link:hover {

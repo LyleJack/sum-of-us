@@ -55,12 +55,6 @@ export function NavBar() {
 
           {/* Right: Book Now, Login/Logout and Theme Toggle */}
           <div className="flex items-center space-x-4">
-            <Link
-              to="/booking"
-              className={styles.button.primarySmall}
-            >
-              Book Now
-            </Link>
             {auth.isLoading ? null : auth.isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 {displayName ? (
@@ -83,20 +77,12 @@ export function NavBar() {
                 Login
               </button>
             )}
-            {/* <select
-              aria-label="Color scheme"
-              className={styles.nav.schemeSelect}
-              onChange={(event) =>
-                setSchemeName(event.target.value as ColorSchemeName)
-              }
-              value={schemeName}
+            <Link
+              to="/booking"
+              className={styles.button.primarySmall}
             >
-              {colorSchemeNames.map((name) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))} 
-            </select>*/}
+              Book Now
+            </Link>
           </div>
         </div>
       </div>

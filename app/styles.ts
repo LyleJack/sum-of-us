@@ -38,6 +38,10 @@ export const styles = {
     featureImage: "welcome-feature-image",
     joinBanner: "welcome-join-banner",
   },
+  generic: {
+    background: "generic-background",
+    backgroundImage: "generic-background-image",
+  },
   footer: {
     footer: "footer",
     logo: "footer-logo",
