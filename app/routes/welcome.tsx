@@ -10,7 +10,6 @@ import Footer from "../components/Footer";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {
-  const joinUsText = "Join us →";
   return (
     <Page className={styles.welcome.page}>
       <PageStack className={styles.welcome.stack}>

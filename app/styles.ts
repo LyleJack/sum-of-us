@@ -36,7 +36,6 @@ export const styles = {
     featureGrid: "welcome-feature-grid",
     featureCard: "welcome-feature-card",
     featureImage: "welcome-feature-image",
-    joinBanner: "welcome-join-banner",
   },
   classes: {
     page: "classes-page",
@@ -53,18 +52,16 @@ export const styles = {
     scheduleNote: "classes-schedule-note",
     scheduleSmall: "classes-schedule-small",
     scheduleImage: "classes-schedule-image",
-    joinBanner: "classes-join-banner",
-    joinTrack: "classes-join-track",
-    joinGroup: "classes-join-group",
     footer: "classes-footer",
     footerLinks: "classes-footer-links",
     footerVenue: "classes-footer-venue",
     footerSocial: "classes-footer-social",
     footerLogo: "classes-footer-logo",
   },
-  generic: {
-    background: "generic-background",
-    backgroundImage: "generic-background-image",
+  join: {
+    banner: "join-banner",
+    track: "join-track",
+    group: "join-group",
   },
   footer: {
     footer: "footer",

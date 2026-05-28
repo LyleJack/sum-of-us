@@ -4,9 +4,9 @@ import { styles } from "../styles";
 
 export function JoinUsBanner() {
   const joinUsText = "Join us →";
-    return  <Link to="/booking" className={styles.classes.joinBanner} aria-label="Book a class">
+    return  <Link to="/booking" className={styles.join.banner} aria-label="Book a class">
           <motion.div
-            className={styles.classes.joinTrack}
+            className={styles.join.track}
             animate={{ x: ["-50%", "0%"] }}
             transition={{
               ease: "linear",
@@ -14,12 +14,12 @@ export function JoinUsBanner() {
               repeat: Infinity,
             }}
           >
-            <div className={styles.classes.joinGroup}>
+            <div className={styles.join.group}>
               {[...Array(10)].map((_, i) => (
                 <span key={i}>{joinUsText}</span>
               ))}
             </div>
-            <div className={styles.classes.joinGroup}>
+            <div className={styles.join.group}>
               {[...Array(10)].map((_, i) => (
                 <span key={`dup-${i}`}>{joinUsText}</span>
               ))}
