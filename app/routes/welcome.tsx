@@ -1,13 +1,13 @@
 import type { CSSProperties } from "react";
 import { Link } from "react-router";
 import { Page, PageStack } from "../components/ui";
-import background from "../images/welcome-background.svg";
+import background from "../images/welcome-background.webp";
 import bigLogo from "../images/big-logo.svg";
 import communityPhoto from "../images/welcome-community.jpg";
 import beachPhoto from "../images/welcome-beach.jpg";
 import { styles } from "../styles";
 import Footer from "../components/Footer";
-import { motion } from 'framer-motion';
+import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {
   const joinUsText = "Join us →";
@@ -92,33 +92,7 @@ export function Welcome() {
             className={styles.welcome.featureImage}
           />
         </section>
-        <Link to="/booking" className={styles.welcome.joinBanner}>
-<div className={styles.welcome.joinBanner}>
-  <motion.div
-    style={{ display: "flex", width: "max-content" }}
-    animate={{ x: ["-50%", "0%"] }}
-    transition={{
-      ease: "linear",
-      duration: 15,
-      repeat: Infinity,
-    }}
-  >
-    {/* first copy */}
-    <div style={{ display: "flex" }}>
-      {[...Array(10)].map((_, i) => (
-        <span key={i}>{joinUsText}</span>
-      ))}
-    </div>
-
-    {/* second copy (duplicate for seamless loop) */}
-    <div style={{ display: "flex" }}>
-      {[...Array(10)].map((_, i) => (
-        <span key={`dup-${i}`}>{joinUsText}</span>
-      ))}
-    </div>
-  </motion.div>
-</div>
-        </Link>
+        <JoinUsBanner />
         <Footer />
       </PageStack>
     </Page>
