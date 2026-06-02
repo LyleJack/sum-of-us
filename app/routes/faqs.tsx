@@ -5,7 +5,7 @@ export default function FAQs() {
     <Page>
       <PageStack>
         <h1>FAQs</h1>
-        <p>Frequently asked questions will go here.</p>
+        <p>Frequently asked questions will go here?</p>
       </PageStack>
     </Page>
   );
