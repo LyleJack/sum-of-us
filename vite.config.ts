@@ -6,6 +6,6 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
-    allowedHosts: ["localhost",'sum-of-us-dev.sumofusdev.workers.dev'],
+    allowedHosts: ["localhost",'https://sum-of-us-dev.sumofusdev.workers.dev'],
   },
 });
