@@ -6,22 +6,27 @@
     "build": "vite build",
     "dev": "vite",
     "start": "vite preview",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.1045.0",
     "isbot": "^5.1.36",
+    "motion": "^12.38.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router": "7.14.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.39.1",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
-    "vite": "^8.0.3"
+    "vite": "^8.0.3",
+    "wrangler": "^4.96.0"
   }
 }

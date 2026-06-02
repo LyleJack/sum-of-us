@@ -12,7 +12,7 @@ export function App() {
   return (
     <AuthModalProvider>
       <NavBar />
-      <div className="pt-16">
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

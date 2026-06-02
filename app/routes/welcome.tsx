@@ -1,68 +1,99 @@
-import { useState, useEffect } from "react";
-import { useAuthModal } from "../components/AuthModal";
-import { Page, PageStack, Panel } from "../components/ui";
-import joinLogo from "../placeholder_icon.png";
+import type { CSSProperties } from "react";
+import { Link } from "react-router";
+import { Page, PageStack } from "../components/ui";
+import background from "../images/welcome-background.webp";
+import bigLogo from "../images/big-logo.svg";
+import communityPhoto from "../images/welcome-community.jpg";
+import beachPhoto from "../images/welcome-beach.jpg";
 import { styles } from "../styles";
-
+import Footer from "../components/Footer";
+import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {
-  const { openAuthModal } = useAuthModal();
-  let sumArray = ["fight", "train", "protect", "learn", "defend", "empower", "unite", "support", "grow", "inspire", "transform", "challenge", "overcome", "resist", "prevail"];
-  const [sumOfUsVerb, setSumOfUsVerb] = useState(sumArray[0]);
-  const [sumOfUsVerbCount, setSumOfUsVerbCount] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSumOfUsVerb(sumArray[sumOfUsVerbCount % sumArray.length]);
-      setSumOfUsVerbCount((prev) => prev + 1);
-    }, 500);
-    return () => clearInterval(interval);
-  }, [sumOfUsVerbCount]);
   return (
-    <Page>
-      <PageStack>
-        <header className={styles.welcome.header}>
-          <div className={styles.welcome.titleBox}>
-            <h1 className={styles.text.title}>
-              Sum Of Us{" "}
-              <span className={styles.text.soft}>
-                {sumOfUsVerb}
-              </span>
-            </h1>
-          </div>
-        </header>
-        <div className={styles.welcome.actions}>
-          <Panel as="nav" className={styles.welcome.panel}>
-            <p className={styles.welcome.prompt}>
-              What&apos;s next?
+    <Page className={styles.welcome.page}>
+      <PageStack className={styles.welcome.stack}>
+        <div
+          className={styles.welcome.background}
+          style={{ "--welcome-background-image": `url(${background})` } as CSSProperties}
+        >
+          <div className={styles.welcome.classMeta}>
+            <p>
+              <br />Self-defence classes<br />built for real life.
             </p>
-            <ul>
-              {resources.map(({ href, text, icon }) => (
-                <li key={href}>
-                  <button
-                    className={styles.text.action}
-                    onClick={() => openAuthModal("signup")}
-                    type="button"
-                  >
-                    {icon}
-                    {text}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </Panel>
+            <p>
+              £5 per class<br />Tuesdays + Thursdays<br />7-8pm
+            </p>
+          </div>
+          <img src={bigLogo} alt="Sum of Us" className={styles.welcome.classLogo} />
         </div>
+        <section className={styles.welcome.intro} aria-labelledby="welcome-intro-title">
+          <h1 id="welcome-intro-title" className={styles.welcome.introTitle}>
+            Made in Glasgow for Glasgow
+          </h1>
+          <div className={styles.welcome.introCopy}>
+            <p>
+              Self-defence classes built for real life. Affordable pricing and
+              a charity-based model that gives back to the community. No
+              experience needed. No pressure. Just a fun way to meet new people
+              and learn something along the way.
+            </p>
+            <Link to="/booking" className={styles.welcome.textLink}>
+              Try your first class for free
+            </Link>
+          </div>
+        </section>
+        <img
+          src={communityPhoto}
+          alt="A group of people standing together outside"
+          className={styles.welcome.photoBanner}
+        />
+        <section className={styles.welcome.featureGrid} aria-label="Class values">
+          <article className={styles.welcome.featureCard}>
+            <h2>This isn&apos;t about fighting</h2>
+            <p>
+              It&apos;s about feeling more comfortable in your body, and in the
+              world around you. We run small, supportive self-defence classes
+              that focus on awareness, boundaries and simple, practical
+              techniques.
+            </p>
+            <p>
+              You don&apos;t need to be strong or fit.<br />
+              You just need to show up.
+            </p>
+          </article>
+          <article className={styles.welcome.featureCard} style={{  "background": "#faf7f2" }}>
+            <h2>A fun space for everyone</h2>
+            <p>
+              Each class is simple and structured so you know what to expect.
+              Warm ups are short (and fun). We learn a few practical techniques
+              and talk you through real-life situations.
+            </p>
+            <p>
+              We go at a pace that feels right for you. You can sit out at any
+              time. No pressure. And you never have to do anything that makes
+              you feel uncomfortable.
+            </p>
+          </article>
+          <article className={styles.welcome.featureCard}>
+            <h2>A place to be yourself</h2>
+            <p>
+              These classes are for anyone who wants to feel safer. Especially
+              if you&apos;ve never done anything like this before. Or gyms and
+              martial arts spaces don&apos;t feel like your thing. You want
+              something low-pressure and welcoming. This is it.
+            </p>
+            <p>(Also, you won&apos;t be the only beginner.)</p>
+          </article>
+          <img
+            src={beachPhoto}
+            alt="Community focused self-defence classes in Glasgow"
+            className={styles.welcome.featureImage}
+          />
+        </section>
+        <JoinUsBanner />
+        <Footer />
       </PageStack>
     </Page>
   );
 }
-
-const resources = [
-  {
-    href: "/booking",
-    text: "Join now",
-    icon: (
-      <img src={joinLogo} alt="Join us now" className={styles.welcome.icon} />
-    ),
-  },
-];
