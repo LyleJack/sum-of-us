@@ -106,7 +106,7 @@ body {
   background-image:
     linear-gradient(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.18)),
     var(--welcome-background-image);
-  background-position: center 30%;
+  background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -144,7 +144,7 @@ body {
 .welcome-class-meta {
   position: absolute;
   bottom: 29%;
-  left: 7.5%;
+  left: 5%;
   display: flex;
   align-items: flex-start;
   gap: clamp(1rem, 2vw, 2.25rem);
@@ -162,7 +162,7 @@ body {
 .welcome-class-logo {
   position: absolute;
   bottom: 4%;
-  left: 7.5%;
+  left: 5%;
   width: min(85vw, 1313px);
   max-height: 25%;
 }
@@ -280,7 +280,7 @@ body {
   background-image:
     linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)),
     var(--classes-hero-image);
-  background-position: center 38%;
+  background-position: center 0%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -641,6 +641,7 @@ body {
   background: #2C282799;
   background-blend-mode: multiply;
   border-radius: var(--radius-pill);
+  top: 2.5vh
 }
 
 .site-nav-link {
