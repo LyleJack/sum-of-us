@@ -387,6 +387,218 @@ body {
   object-position: center 30%;
 }
 
+/* about */
+
+.about-page {
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+  width: 100%;
+  padding-bottom: 0;
+  overflow-x: hidden;
+  background: #2c2827;
+  color: #2c2827;
+}
+
+.about-hero {
+  height: clamp(26rem, 41.667vw, 37.5rem);
+  background-image: var(--about-hero-image);
+  background-position: center 37.5%;
+  background-repeat: no-repeat;
+  background-size:100dvw;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4.9vw, 4.4rem);
+  min-height: clamp(31rem, 41.944vw, 37.75rem);
+  background: #f4e8e3;
+  padding: clamp(3rem, 5.9vw, 5.3125rem) clamp(1.5rem, 4.306vw, 3.875rem) 0;
+}
+
+.about-title {
+  margin: 0;
+  color: #2c2827;
+  font-size: 4.5vw;
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-intro-main {
+  max-width: 40rem;
+  margin: 0;
+  color: #3a3532;
+  font-size: 2.25vw;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.about-intro-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.78vw, 2.5rem);
+  max-width: 34rem;
+  margin-top: clamp(1.6rem, 3.4vw, 3.0625rem);
+}
+
+.about-intro-notes p {
+  margin: 0;
+  color: #3a3532;
+  font-size: 1vw;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+
+.about-people {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  height: clamp(24rem, 33.472vw, 30.125rem);
+  overflow: hidden;
+  background: #faf7f2;
+}
+
+.about-people-panel {
+  display: grid;
+  align-content: start;
+  height: 100%;
+  overflow: hidden;
+  background: #faf7f2;
+  padding: clamp(2.5rem, 4.167vw, 3.75rem) clamp(1.5rem, 4.306vw, 3.875rem);
+}
+
+.about-people-details,
+.about-people-note,
+.about-people-small {
+  margin: 0;
+  color: #3a3532;
+  font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.about-people-note {
+  margin-top: clamp(1.25rem, 2.15vw, 1.9375rem);
+}
+
+.about-people-small {
+  margin-top: clamp(0.7rem, 1.18vw, 1.0625rem);
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  font-weight: 500;
+}
+
+.about-people-image {
+  display: block;
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+/* ==========================================================================
+   People Carousel Component Styles
+   ========================================================================== */
+
+/* Outer structural wrapper */
+.people-carousel-container {
+  width: 100%;
+  background-color: #faf7f2;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Horizontal scroll track */
+.people-carousel-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 1rem 2rem;
+  
+  /* Critical for programmatic requestAnimationFrame and drag accuracy */
+  scroll-behavior: auto; 
+  
+  /* Hand off horizontal physics exclusively to your JS PointerEvents */
+  touch-action: pan-y; 
+  
+  /* Hide native scrollbars while preserving desktop trackpad scrolling functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  cursor: grab;
+}
+
+.people-carousel-track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.people-carousel-track:active {
+  cursor: grabbing;
+}
+
+/* Individual Card Styling */
+.people-carousel-card {
+  flex: 0 0 24rem; /* Uniform base sizing allowing subsequent cards to peek into view */
+  max-width: 85vw;  /* Prevents blowout on ultra-small viewport widths */
+  background-color: #f4e8e3;
+  border-radius: 2rem; /* Deep curvature matching reference UI */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none; /* Disables unwanted highlight text artifacts during drag */
+  box-shadow: 0 4px 20px rgba(44, 40, 39, 0.03);
+}
+
+/* Card Visual Header */
+.people-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  pointer-events: none; /* Shields the element from broken browser drag states */
+  filter: grayscale(100%); /* Matches the mono image look in your reference screenshot */
+}
+
+/* Content Container */
+.people-card-body {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Meta Overline Description */
+.people-card-role {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #3a3532;
+  margin: 0 0 0.25rem 0;
+}
+
+/* Main Display Header */
+.people-card-name {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #2c2827;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Biographical Information Typography */
+.people-card-bio {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #3a3532;
+  margin: 0;
+}
+
 /* Join Banner */
 
 .join-banner {
