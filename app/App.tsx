@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "react-router";
+import { useEffect } from "react";
 import { AuthModalProvider } from "./components/AuthModal";
 import { NavBar } from "./components/NavBar";
 import About from "./routes/about";
@@ -13,6 +14,7 @@ export function App() {
     <AuthModalProvider>
       <NavBar />
       <div>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -25,4 +27,15 @@ export function App() {
       </div>
     </AuthModalProvider>
   );
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Instantly resets view to coordinates 0,0 when path string alters
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null; // This component serves strictly as an operational listener hook
 }
