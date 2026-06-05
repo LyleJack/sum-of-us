@@ -69,8 +69,6 @@ export default function Classes() {
         </section>
 
         <JoinUsBanner />
-
-        <Footer />
       </Page>
   );
 }

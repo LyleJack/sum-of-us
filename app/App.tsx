@@ -8,6 +8,7 @@ import Booking from "./routes/booking";
 import Classes from "./routes/classes";
 import FAQs from "./routes/faqs";
 import Home from "./routes/home";
+import Footer from "./components/Footer";
 
 export function App() {
   return (
@@ -25,6 +26,7 @@ export function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+      <Footer />
     </AuthModalProvider>
   );
 }

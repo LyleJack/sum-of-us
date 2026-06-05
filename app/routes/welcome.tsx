@@ -92,7 +92,6 @@ export function Welcome() {
           />
         </section>
         <JoinUsBanner />
-        <Footer />
       </PageStack>
     </Page>
   );

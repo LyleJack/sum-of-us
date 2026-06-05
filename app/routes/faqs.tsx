@@ -80,8 +80,7 @@ export default function FAQs() {
   return (
     <Page className={styles.faqs.page}>
       <PageStack className={styles.faqs.stack}>
-        <NavBar />
-           <section
+        <section
           className={styles.faqs.hero}
           aria-label="Self-defence classes"
           style={{ "--background-image": `url(${background})` } as CSSProperties}
@@ -96,7 +95,6 @@ export default function FAQs() {
           </div>
         </section>
         <JoinUsBanner />
-        <Footer />
       </PageStack>
     </Page>
   );

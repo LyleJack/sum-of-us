@@ -48,7 +48,6 @@ export default function About() {
             <PeopleCarousel />
           </div>
         <JoinUsBanner />
-        <Footer />
       </div>
     </Page>
   );

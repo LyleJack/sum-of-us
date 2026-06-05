@@ -907,9 +907,16 @@ body {
   text-underline-offset: 2px;
 }
 
+.auth-age-label,
 .auth-access-label {
   display: block;
   padding-top: 0.25rem;
+}
+
+.auth-age-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .auth-access-copy {
@@ -922,6 +929,44 @@ body {
 .auth-access-input {
   margin-top: clamp(0.25rem, 0.3vw, 0.375rem);
 }
+
+.auth-age-input {
+  vertical-align: baseline;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 50%;        /* Makes it look round like a radio */
+  cursor: pointer;
+  position: relative;
+}
+
+.auth-age-input:checked {
+  border-color: var(--accent);     /* your brand colour */
+}
+
+.auth-age-input:checked::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.auth-age-copy {
+  vertical-align: baseline;
+  color: var(--auth-text);
+  font-size: clamp(11px, 0.8vw, 16.5px);
+  line-height: 1.25;
+}
+
+
 
 .auth-error {
   color: var(--auth-error);
@@ -1082,7 +1127,8 @@ body {
     padding-left: 0rem !important;
   }
 
-  .site-nav {
+.site-nav:not(.menu-open) {
+    position: fixed !important;
     top: 2.5vh !important;
     left: 2% !important;
     right: 2% !important;
@@ -1094,6 +1140,7 @@ body {
     background: none !important;
     border-radius: var(--radius-pill) !important;
     transition: none !important; 
+    z-index: 20 !important;
   }
   
   .site-nav:not(.menu-open) .site-nav-link,

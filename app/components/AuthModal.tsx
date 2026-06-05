@@ -94,6 +94,7 @@ type AuthModalProps = {
 function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
   const auth = useAwsAuth();
   const titleId = useId();
+  const [over16, setOver16] = useState(false);
   const [accessRequirements, setAccessRequirements] = useState("");
   const [confirmationCode, setConfirmationCode] = useState("");
   const [email, setEmail] = useState("");
@@ -115,6 +116,7 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
     setPasswordVisible(false);
     setPendingConfirmationUsername("");
   }, [mode]);
+
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -293,6 +295,24 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
                   value={accessRequirements}
                 />
               </label>
+              <div className={styles.auth.fieldControl}>
+                <label className={styles.auth.ageLabel}>
+                  <input
+                    className={styles.auth.ageInput}
+                    required
+                    onChange={(e) => setOver16(e.target.checked)}
+                    type="checkbox"
+                    checked={over16}
+                  />
+                  <span className={styles.auth.ageCopy}>I'm 16+ years old.</span>
+                   <span
+            aria-hidden="true"
+            className={cx(styles.auth.requiredMark, styles.auth.requiredAtEnd)}
+          >
+            *
+          </span>
+                </label>
+              </div>
             </>
           ) : needsConfirmation ? null : (
             <button
