@@ -8,11 +8,6 @@ export default function Footer() {
     return (
          <footer className={styles.footer.footer}>
           <div className={styles.footer.content}>
-            <nav className={styles.footer.links} aria-label="Footer">
-              <Link to="/about">Contact us</Link>
-              <Link to="/about">Terms and conditions</Link>
-              <Link to="/about">Policy and Legal</Link>
-            </nav>
             <div className={styles.footer.venue}>
               <p>Tuesdays &amp; Thursdays @ 7pm</p>
               <p>Kelvinhall Glasgow Sports Club</p>
@@ -32,6 +27,11 @@ export default function Footer() {
                 </Link>
               </div>
             </div>
+            <nav className={styles.footer.links} aria-label="Footer">
+              <Link to="/about">Contact us</Link>
+              <Link to="/about">Terms and conditions</Link>
+              <Link to="/about">Policy and Legal</Link>
+            </nav>
           </div>
           <img src={bigLogo} alt="Sum of Us" className={styles.footer.logo} />
         </footer>

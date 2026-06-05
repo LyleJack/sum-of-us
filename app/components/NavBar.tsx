@@ -132,7 +132,7 @@ function Logo({isOpen}: {isOpen: boolean}) {
     <div className="nav-header-row">
       <picture>
         {/* If viewport width is less than 48rem (768px), display the small mobile logo */}
-        {!isOpen && <source srcSet={mobileLogo} media="(max-width: 47.99rem)" />}
+        {!isOpen && <source srcSet={mobileLogo} media="(max-width: 47.99rem)"/>}
         {/* Fallback baseline: displays the full desktop logo on larger screens */}
         <img 
           src={logoLight} 
