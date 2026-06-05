@@ -9,11 +9,10 @@ import Footer from "../components/Footer";
 export default function Classes() {
   return (
     <Page className={styles.classes.page}>
-      <div className={styles.classes.canvas}>
         <section
           className={styles.classes.hero}
           aria-label="Self-defence classes"
-          style={{ "--classes-hero-image": `url(${background})` } as CSSProperties}
+          style={{ "--background-image": `url(${background})` } as CSSProperties}
         />
 
         <section className={styles.classes.intro} aria-labelledby="classes-intro-title">
@@ -72,7 +71,6 @@ export default function Classes() {
         <JoinUsBanner />
 
         <Footer />
-      </div>
-    </Page>
+      </Page>
   );
 }

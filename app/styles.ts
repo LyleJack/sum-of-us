@@ -53,6 +53,14 @@ export const styles = {
     scheduleSmall: "classes-schedule-small",
     scheduleImage: "classes-schedule-image",
   },
+  faqs: {
+    page: "faqs-page",
+    canvas: "faqs-canvas",
+    hero: "faqs-hero",
+    intro: "faqs-intro",
+    introTitle: "faqs-intro-title",
+    stack: "faqs-stack",
+  },
   about: {
     page: "about-page",
     canvas: "about-canvas",
