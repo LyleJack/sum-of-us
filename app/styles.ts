@@ -63,7 +63,7 @@ export const styles = {
   },
   about: {
     page: "about-page",
-    canvas: "about-canvas",
+    stack: "about-stack",
     hero: "about-hero",
     intro: "about-intro",
     title: "about-title",

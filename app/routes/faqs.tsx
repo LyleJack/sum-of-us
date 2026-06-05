@@ -1,6 +1,4 @@
-import { NavBar } from "../components/NavBar";
 import { Page, PageStack } from "../components/ui";
-import Footer from "../components/Footer";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 import background from "../images/faqs-background.webp";
 import { styles } from "../styles";

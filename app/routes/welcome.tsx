@@ -6,7 +6,6 @@ import bigLogo from "../images/big-logo.svg";
 import communityPhoto from "../images/welcome-community.jpg";
 import beachPhoto from "../images/welcome-beach.jpg";
 import { styles } from "../styles";
-import Footer from "../components/Footer";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {

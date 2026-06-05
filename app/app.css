@@ -85,6 +85,7 @@ body {
   color: #2c2827;
 }
 
+.about-stack,
 .faqs-stack,
 .welcome-stack {
   width: 100%;
@@ -431,10 +432,14 @@ body {
 
 /* Outer structural wrapper */
 .people-carousel-container {
-  width: 100%;
-  background-color: #faf7f2;
-  padding: 4rem 0;
+width: 100vw;               /* Force full screen viewport wide span */
   position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: transparent; 
+  padding: 1rem 0;
   overflow: hidden;
 }
 
@@ -444,33 +449,28 @@ body {
   gap: 2rem;
   overflow-x: auto;
   padding: 1rem 2rem;
-  
-  /* Critical for programmatic requestAnimationFrame and drag accuracy */
+  padding-left: 1.5rem !important; 
+  padding-right: 1.5rem !important; 
   scroll-behavior: auto; 
-  
-  /* Hand off horizontal physics exclusively to your JS PointerEvents */
   touch-action: pan-y; 
-  
-  /* Hide native scrollbars while preserving desktop trackpad scrolling functionality */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
   cursor: grab;
 }
 
 .people-carousel-track::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
+  display: none; 
 }
 
 .people-carousel-track:active {
   cursor: grabbing;
 }
 
-/* Individual Card Styling */
 .people-carousel-card {
-  flex: 0 0 24rem; /* Uniform base sizing allowing subsequent cards to peek into view */
-  max-width: 85vw;  /* Prevents blowout on ultra-small viewport widths */
+  flex: 0 0 24rem; 
+  max-width: 75vw;
   background-color: #f4e8e3;
-  border-radius: 2rem; /* Deep curvature matching reference UI */
+  border-radius: 2rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;

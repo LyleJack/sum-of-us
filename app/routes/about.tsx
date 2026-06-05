@@ -1,16 +1,15 @@
 import type { CSSProperties } from "react";
-import { Page } from "../components/ui";
+import { Page, PageStack } from "../components/ui";
 import background from "../images/about-1.jpg";
 import aboutPhoto from "../images/about_2.jpg";
 import { styles } from "../styles";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 import { PeopleCarousel } from "../components/PeopleCarousel";
-import Footer from "../components/Footer";
 
 export default function About() {
   return (
     <Page className={styles.about.page}>
-      <div className={styles.about.canvas}>
+      <PageStack className={styles.about.stack}>
         <section
           className={styles.about.hero}
           aria-label="Self-defence about"
@@ -36,7 +35,7 @@ export default function About() {
           </div>
         </section>
 
-         <img
+        <img
             src={aboutPhoto}
             alt=""
             className={styles.about.peopleImage}
@@ -48,7 +47,7 @@ export default function About() {
             <PeopleCarousel />
           </div>
         <JoinUsBanner />
-      </div>
+      </PageStack>
     </Page>
   );
 }
