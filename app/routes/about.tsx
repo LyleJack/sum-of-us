@@ -18,7 +18,7 @@ export default function About() {
 
         <section className={styles.about.intro} aria-labelledby="about-intro-title">
           <h1 id="about-intro-title" className={styles.about.title}>
-            WHY WE<br />STARTED
+            WHY WE <br />STARTED
           </h1>
           <div>
             <p className={styles.about.introMain}>

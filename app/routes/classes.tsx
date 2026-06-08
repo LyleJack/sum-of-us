@@ -16,7 +16,7 @@ export default function Classes() {
 
         <section className={styles.classes.intro} aria-labelledby="classes-intro-title">
           <h1 id="classes-intro-title" className={styles.classes.introTitle}>
-            SIMPLE<br />+ FLEXIBLE
+            SIMPLE <br />+ FLEXIBLE
           </h1>
           <div>
             <p className={styles.classes.introMain}>

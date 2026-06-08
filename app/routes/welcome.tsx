@@ -18,10 +18,12 @@ export function Welcome() {
         >
           <div className={styles.welcome.classMeta}>
             <p>
-              <br />Self-defence classes<br />built for real life.
+              Self-defence classes<br />
+              built for real life.
             </p>
             <p>
-              £5 per class<br />Tuesdays + Thursdays<br />7-8pm
+              £5 per class | £35 monthly <br />
+              Tuesdays & Thursdays 7pm
             </p>
           </div>
           <img src={bigLogo} alt="Sum of Us" className={styles.welcome.classLogo} />
