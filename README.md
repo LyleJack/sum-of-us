@@ -1,6 +1,9 @@
 ## Bugs/Issues
-- Text styles (see Google Doc)
-- Login modal text and element sizing
+- ~~Text styles (see Google Doc)~~
+- ~~Login modal text and element sizing~~
+- Narrow (non-mobile) window bugs:
+    - nav bar "LOGIN" AND "BOOK NOW" get pushed off-screen
+    - Welcome page, meta notes are too high above logo
 
 ## To-do list:
 - Write a proper README

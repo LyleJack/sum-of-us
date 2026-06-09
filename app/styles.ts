@@ -103,6 +103,8 @@ export const styles = {
   },
   nav: {
     shell: "site-nav",
+    header: "site-nav-header",
+    linkContainer: "site-nav-link-container",
     link: "site-nav-link",
     user: "site-nav-user",
     schemeSelect: "scheme-select",

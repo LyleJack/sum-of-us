@@ -30,7 +30,7 @@ export function Welcome() {
         </div>
         <section className={styles.welcome.intro} aria-labelledby="welcome-intro-title">
           <h1 id="welcome-intro-title" className={styles.welcome.introTitle}>
-            Made in Glasgow for Glasgow
+            MADE IN <br />GLASGOW <br />FOR GLASGOW
           </h1>
           <div className={styles.welcome.introCopy}>
             <p>
@@ -51,7 +51,7 @@ export function Welcome() {
         />
         <section className={styles.welcome.featureGrid} aria-label="Class values">
           <article className={styles.welcome.featureCard}>
-            <h2>This isn&apos;t about fighting</h2>
+            <h2>This isn&apos;t <br />about fighting</h2>
             <p>
               It&apos;s about feeling more comfortable in your body, and in the
               world around you. We run small, supportive self-defence classes
@@ -64,7 +64,7 @@ export function Welcome() {
             </p>
           </article>
           <article className={styles.welcome.featureCard} style={{  "background": "#faf7f2" }}>
-            <h2>A fun space for everyone</h2>
+            <h2>A fun space <br />for everyone</h2>
             <p>
               Each class is simple and structured so you know what to expect.
               Warm ups are short (and fun). We learn a few practical techniques
@@ -77,7 +77,7 @@ export function Welcome() {
             </p>
           </article>
           <article className={styles.welcome.featureCard}>
-            <h2>A place to be yourself</h2>
+            <h2>A place to <br />be yourself</h2>
             <p>
               These classes are for anyone who wants to feel safer. Especially
               if you&apos;ve never done anything like this before. Or gyms and

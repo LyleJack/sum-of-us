@@ -15,9 +15,7 @@ export function NavBar() {
 
   return (
     <nav className={`${styles.nav.shell} site-nav ${isOpen ? "menu-open" : ""}`}>
-      <div className="px-4 sm:px-6 lg:px-8 w-full">
-        
-        <div className="flex justify-between items-center h-16 nav-header-row">
+        <div className={styles.nav.header}>
           
           <div className="flex-shrink-0">
             <Link to="/" onClick={() => setIsOpen(false)}>
@@ -31,12 +29,9 @@ export function NavBar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >
-            <span />
-            <span />
-            <span />
           </button>
 
-          <div className="hidden md:flex space-x-8">
+          <div className={styles.nav.linkContainer}>
             <Link to="/about" className={styles.nav.link}>About</Link>
             <Link to="/classes" className={styles.nav.link}>Classes</Link>
             <Link to="/faqs" className={styles.nav.link}>FAQs</Link>
@@ -120,9 +115,7 @@ export function NavBar() {
               Book Now
             </Link>
           </div>
-
         </div>
-      </div>
     </nav>
   );
 }
