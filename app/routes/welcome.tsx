@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { useState, useEffect} from "react"
 import { Link } from "react-router";
 import { Page, PageStack } from "../components/ui";
 import background from "../images/welcome-background.webp";
@@ -9,6 +10,26 @@ import { styles } from "../styles";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {
+  const [dbResp, setDBResp] = useState<any>("NO DATA YET");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadMembers() {
+      try {
+        console.log("fetching data")
+        const response = await fetch("http://localhost:8787/dbTest");
+        console.log("fetched, response")
+        const data = await response.json();
+        console.log("transformed to", data)
+        setDBResp(JSON.stringify(data, null, 2));
+      } finally {
+        setLoading(false);
+      }
+    }    
+    loadMembers();
+  }, []);
+
+    
   return (
     <Page className={styles.welcome.page}>
       <PageStack className={styles.welcome.stack}>
@@ -19,7 +40,7 @@ export function Welcome() {
           <div className={styles.welcome.classMeta}>
             <p>
               Self-defence classes<br />
-              built for real life.
+              built for real life. <br/>DB HERE: ||{!loading?dbResp:"|X|LOADING|X|"}||
             </p>
             <p>
               £5 per class | £35 monthly <br />

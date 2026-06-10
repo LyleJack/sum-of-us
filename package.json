@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.39.1",
+    "@cloudflare/workers-types": "^4.20260610.1",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22",
@@ -28,6 +29,6 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
     "vite": "^8.0.3",
-    "wrangler": "^4.96.0"
+    "wrangler": "^4.99.0"
   }
 }
