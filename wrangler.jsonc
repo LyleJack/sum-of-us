@@ -8,6 +8,11 @@
   "assets": {
     "not_found_handling": "single-page-application"
   },
+  "d1_databases": [{
+    "binding": "SUM_OF_US_DB",
+    "database_name": "sou-db",
+    "database_id": "04637936-0d0e-4073-9d66-34569531ea0a"
+  }],
   "compatibility_flags": [
     "nodejs_compat"
   ]
