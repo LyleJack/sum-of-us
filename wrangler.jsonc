@@ -1,19 +1,22 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sum-of-us-dev",
-  "compatibility_date": "2026-06-02",
-  "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "not_found_handling": "single-page-application"
-  },
-  "d1_databases": [{
-    "binding": "SUM_OF_US_DB",
-    "database_name": "sou-db",
-    "database_id": "04637936-0d0e-4073-9d66-34569531ea0a"
-  }],
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "sum-of-us-dev",
+	"compatibility_date": "2026-06-02",
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"not_found_handling": "single-page-application"
+	},
+	"d1_databases": [
+		{
+			"binding": "SUM_OF_US_DB",
+			"database_name": "sum_of_us_db",
+			"database_id": "96e0a3cb-041a-4eb7-9d2f-8249aac579b6",
+			"remote": true
+		}
+	],
+	"compatibility_flags": [
+		"nodejs_compat"
+	]
 }
