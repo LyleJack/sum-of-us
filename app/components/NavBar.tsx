@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useAwsAuth } from "./AwsAuth";
 import { useAuthModal } from "./AuthModal";
-import logoLight from "../sum-of-us-logo.svg";
+import classicLogo from "../sum-of-us-logo.svg";
 import mobileLogo from "../images/mobileLogo.svg";
 import { styles } from "../styles";
 import { useState } from "react";
@@ -126,7 +126,7 @@ function Logo({isOpen}: {isOpen: boolean}) {
       <picture>
         {!isOpen && <source srcSet={mobileLogo} media="(max-width: 47.99rem)"/>}
         <img 
-          src={logoLight} 
+          src={classicLogo} 
           alt="Sum Of Us Logo" 
           className="site-nav-logo" 
           width={isOpen ? "175rem" : "auto"} 

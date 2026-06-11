@@ -318,6 +318,7 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
             <button
               className={styles.auth.forgotLink}
               type="button"
+              onClick={() => {alert("Great job 👍")}}
             >
               Forgot password
             </button>

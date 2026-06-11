@@ -1,6 +1,6 @@
 ## Bugs/Issues
 - ~~Text styles (see Google Doc)~~
-- ~~Login modal text and element sizing~~
+- Login modal text and element sizing
 - Desktop:
     - Class schedule image has changed focal point/position
 - Narrow (non-mobile) window bugs:
@@ -8,8 +8,7 @@
     - Welcome page, meta notes are too high above logo
 - Mobile:
     - META text on welcome is too small and poorly positioned, add a clamp
-    - Mobile sidebar logo has been replaced with full logo and is in line with the buttons
-    - Login modal text is weirdly spaced and too small (same for sign up)
+    - ~~Login modal text is weirdly spaced and too small (same for sign up)~~
 - General:
     - About image is slow to load
 
@@ -19,7 +18,7 @@
 - Sign up confirmation page
 - Booking flow
     - Select class/date to book
-    - Payment options (if !subsciption)
+    - Payment options (if !subscription)
         - including setting up payment system
     - Confirmation page
 - User Accounts page

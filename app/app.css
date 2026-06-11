@@ -160,10 +160,10 @@ body {
   position: absolute;
   bottom: 5dvh;
   left: 5dvh;
-  width: min(85vw, 1313px);
+  width: auto;
+  max-width: min(85vw, 1313px);
   max-height: 25%;
   object-fit: contain;
-  object-position: left bottom;
 }
 
 .welcome-intro {
@@ -783,6 +783,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   padding: 2rem 1rem;
 }
 
+/* edit around here */
 .auth-dialog {
   position: relative;
   width: 100%;
@@ -906,6 +907,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   font-size: clamp(8px, 1vw, 12px);
   text-decoration: underline;
   text-underline-offset: 2px;
+  cursor: pointer;
 }
 
 .auth-age-label,
@@ -987,6 +989,7 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 .auth-submit:hover {
+  cursor: pointer;
   background: var(--accent-hover);
 }
 
@@ -1007,10 +1010,12 @@ width: 100vw;               /* Force full screen viewport wide span */
   text-align: center;
   color: var(--text-muted);
   font-size: clamp(8px, 0.75vw, 18px);
+   white-space: nowrap;
 }
 
 .auth-footer-button {
   text-decoration: underline;
+  cursor: pointer;
   text-underline-offset: 2px;
 }
 
@@ -1033,6 +1038,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   font-weight: 700;
   text-transform: uppercase;
   transition: color 150ms;
+  cursor: pointer;
 }
 
 .auth-password-toggle:hover {
@@ -1109,7 +1115,7 @@ width: 100vw;               /* Force full screen viewport wide span */
 
 @media (width >= 40rem) {
   .auth-dialog {
-    max-width: clamp(342px, 24vw, 513px);
+    max-width: clamp(342px, 25vw, 513px);
     padding-inline: clamp(31px, 2.2vw, 46.5px);
   }
 }
@@ -1142,9 +1148,22 @@ width: 100vw;               /* Force full screen viewport wide span */
     z-index: 20 !important;
   }
   
+  .site-nav.menu-open .site-nav-link,
+  .site-nav.menu-open .primary-button-small {
+    display: block !important;
+    width: max-content !important;    
+    margin-bottom: 1.25rem !important;
+    text-align: left !important;      
+    z-index: 20 !important;          
+  }
+
   .site-nav:not(.menu-open) .site-nav-link,
   .site-nav:not(.menu-open) .primary-button-small,
   .site-nav:not(.menu-open) .site-nav-user {
+    display: none !important;
+  }
+
+  .site-nav-link-container {
     display: none !important;
   }
 
@@ -1155,13 +1174,12 @@ width: 100vw;               /* Force full screen viewport wide span */
     left: auto !important;
     bottom: 0 !important;
     width: 50vw !important;               
-    min-width: 290px !important;          
+    min-width: 230px !important;          
     height: 100vh !important;
     height: 100dvh !important;            
     background: #211f1d !important;       
     border-radius: 0 !important;          
     box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4) !important;
-    
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;   
@@ -1170,15 +1188,6 @@ width: 100vw;               /* Force full screen viewport wide span */
     overflow-y: auto !important;
     z-index: 20 !important;            
   }
-
-.site-nav.menu-open .site-nav-link,
-.site-nav.menu-open .primary-button-small {
-  display: block !important;
-  width: max-content !important;    
-  margin-bottom: 1.25rem !important;
-  text-align: left !important;      
-  z-index: 20 !important;          
-}
 
   .site-nav.menu-open .primary-button-small {
     padding: 0.5rem 2rem !important;
@@ -1252,7 +1261,8 @@ width: 100vw;               /* Force full screen viewport wide span */
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 50vw !important;
+    /* match the minimum value with the width of .site-nav.menu-open */
+    width: min(50vw, 100vw - 230px) !important;
     height: 100vh !important;
     height: 100dvh !important;
     
@@ -1275,12 +1285,14 @@ width: 100vw;               /* Force full screen viewport wide span */
   gap: clamp(1rem, 2vw, 2.25rem);
   color: #f1e7e2;
   line-height: 1.06;
-  bottom: 24%;
+  bottom: clamp(5rem, 17.5%, 15rem);
   flex-direction: column;
+  font-size: medium;
 }
 
   .welcome-class-logo {
-    bottom: 6%;
+    bottom: 5%;
+    left: 5%
   }
 
   .about-route-active .site-nav,
@@ -1413,7 +1425,11 @@ width: 100vw;               /* Force full screen viewport wide span */
 
   footer,
   .site-footer,
-  [class*="footer"] {
+  .footer-content,
+  .footer-links,
+  .footer-social,
+  .footer-venue,
+  .footer-logo {
     padding: 0.5rem !important;
     height: auto !important;
     min-height: initial !important;
