@@ -2,16 +2,16 @@ import { useAwsAuth } from "../components/AwsAuth";
 import { useAuthModal } from "../components/AuthModal";
 import { Page, PageStack, PrimaryButton } from "../components/ui";
 import { styles } from "../styles";
+import Demo from "./ClassBookingFlow";
 
 export default function Booking() {
   const auth = useAwsAuth();
   const { openAuthModal } = useAuthModal();
 
   return (
-    <Page>
-      <PageStack>
-        <h1>book here</h1>
-        {auth.isLoading ? (
+    <Page className={styles.booking.page}>
+      <PageStack >
+        {/* {auth.isLoading ? (
           <p className={styles.text.muted}>Checking sign in...</p>
         ) : auth.error ? (
           <p className={styles.text.danger}>
@@ -27,7 +27,8 @@ export default function Booking() {
           >
             Login to book
           </PrimaryButton>
-        )}
+        )} */}
+        <Demo/>
       </PageStack>
     </Page>
   );

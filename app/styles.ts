@@ -109,6 +109,53 @@ export const styles = {
     user: "site-nav-user",
     schemeSelect: "scheme-select",
   },
+  booking: {
+    page: "booking-page",
+    heading: "booking-h1",
+    sub: "booking-sub",
+    shell: "booking",
+    tabs: {
+      nav: "booking-tabs-nav",
+      tabOn: "booking-tabs-tab booking-tabs-tab--on",
+      tab: "booking-tabs-tab",
+    },
+    grid: {
+      locked: "booking-grid booking-grid-locked",
+      normal: "booking-grid",
+    },
+    card: {
+      locked: "booking-card booking-card--locked",
+      selected: "booking-card booking-card--on",
+      normal: "booking-card",
+      mo: "booking-card-mo",
+      day: "booking-card-day",
+    },
+    cta: {  
+      base: "booking-cta",
+      dim: "booking-cta booking-cta--dim",
+      withGap: "booking-cta booking-cta--top-gap",
+    },
+    payment: {
+      divider: "booking-payment-divider",
+        sectionLabel: "booking-payment-section-label",
+        form: "booking-payment-form",
+        inp: "booking-payment-inp",
+        inpRow: "booking-payment-inp-row",
+        inpWithGrow: "booking-payment-inp--grow",
+        inpCvc: "booking-payment-inp--cvc",
+        wallets: "booking-payment-wallets",
+        wallet: "booking-payment-wallet",
+        fine: "booking-payment-fine",
+    },
+    modal: {
+      overlay: "booking-modal-overlay",
+      dialog: "booking-modal",
+      check: "booking-modal-check",
+      heading: "booking-modal-heading",
+      body: "booking-modal-body",
+      ok: "booking-modal-ok",
+    }
+  },
   panel: {
     bordered: "panel",
   },
