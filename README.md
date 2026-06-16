@@ -1,5 +1,5 @@
 ## Bugs/Issues
-- ~~Text styles (see Google Doc)~~
+
 - Login modal text and element sizing
 - Desktop:
     - Class schedule image has changed focal point/position
@@ -8,26 +8,41 @@
     - Welcome page, meta notes are too high above logo
 - Mobile:
     - META text on welcome is too small and poorly positioned, add a clamp
-    - ~~Login modal text is weirdly spaced and too small (same for sign up)~~
 - General:
     - About image is slow to load
 
+New as of 16/06:
+- Change OAuth to be just "GOOGLE" AND "FACEBOOK" with `Log in with` above 
+- Need a way to handle closing the sidebar when "manage account" is clicked on mobile.
+- Size of user account page on mobile
+- Login seemed a bit flakey on mobile, didn't redirect properly originally, check the callback maybe
+- General pass over all the new code for quality check and simplifications
+- Booking on mobile is a bit wide, give padding
+- User button (for sign out and manage) is cropped on mobile
+- Positioning isn't quite right needs to be rearranged for better aesthetic on mobile and desktop 
+
+- Work out booking flow properly and improve messages etc 
+
+- Cleaning up CSS at some point
+- Go through and fix styles to match the figma better
+
+- AI pass at CSS to try and improve responsiveness
+- AI QA pass
+
+- Set up prod versions
+- More tests
+- Look into miniflare mocking
+
+
+
 ## To-do list:
 - Write a proper README
-- Log out modal
 - Sign up confirmation page
-- Booking flow
-    - Select class/date to book
-    - Payment options (if !subscription)
-        - including setting up payment system
+- setting up payment system
     - Confirmation page
-- User Accounts page
-- User Accounts button
 - Expand test coverage
     - Including mobile friendly tests
-- Move user login/authentication outside of AWS 
-- Look into benefits of IaC (potentially add in terraform after gaining more experience at work)
-- Forgot password flow
+- Forgot password flow, partially set up only (needs a please check spam too)
 
 
 ## Potential extras

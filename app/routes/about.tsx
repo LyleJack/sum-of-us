@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Page, PageStack } from "../components/ui";
+import { Page, PageStack } from "../components/UI";
 import background from "../images/about-1.jpg";
 import aboutPhoto from "../images/about_2.jpg";
 import { styles } from "../styles";

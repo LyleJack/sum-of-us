@@ -1,4 +1,4 @@
-import { Page, PageStack } from "../components/ui";
+import { Page, PageStack } from "../components/UI";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 import background from "../images/faqs-background.webp";
 import { styles } from "../styles";

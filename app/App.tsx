@@ -8,7 +8,10 @@ import Booking from "./routes/booking";
 import Classes from "./routes/classes";
 import FAQs from "./routes/faqs";
 import Home from "./routes/home";
+import MembersPage from "./routes/members";
+import SSOCallback from "./routes/SSOCallback";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export function App() {
   return (
@@ -24,6 +27,12 @@ export function App() {
           <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/sso-callback" element={<SSOCallback />} />
+          <Route path="/members" element={
+            <ProtectedRoute>
+              <MembersPage />
+            </ProtectedRoute>
+          } />
         </Routes>
       </div>
       <Footer />

@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { Link } from "react-router";
-import { Page, PageStack } from "../components/ui";
+import { Page, PageStack } from "../components/UI";
 import background from "../images/welcome-background.webp";
 import bigLogo from "../images/big-logo.svg";
 import communityPhoto from "../images/welcome-community.jpg";

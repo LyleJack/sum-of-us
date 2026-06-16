@@ -1,4 +1,4 @@
-import { Page } from "../components/ui";
+import { Page } from "../components/UI";
 import { styles } from "../styles";
 
 export default function AuthCallback() {

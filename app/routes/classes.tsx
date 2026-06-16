@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Page } from "../components/ui";
+import { Page } from "../components/UI";
 import background from "../images/welcome-background.webp";
 import classPhoto from "../images/classes-image-2.webp";
 import { styles } from "../styles";
