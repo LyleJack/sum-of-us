@@ -120,7 +120,7 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
   }, [mode]);
 
   const handleOAuth = async (
-    strategy: "oauth_google" | "oauth_facebook" | "oauth_apple",
+    strategy: "oauth_google" | "oauth_facebook" ,
   ) => {
     if (!signIn) return;
     try {
@@ -268,14 +268,16 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
         {/* OAuth buttons — hidden during email confirmation step */}
         {!needsConfirmation && (
           <>
+            <h2 className={styles.auth.oauthHeader}>Continue With</h2>
             <div className={styles.auth.oauthButtons}>
+              
               <button
                 className={styles.auth.oauthButton}
                 onClick={() => handleOAuth("oauth_google")}
                 type="button"
               >
                 <GoogleIcon />
-                Login with <br/>Google
+                Google
               </button>
               <button
                 className={styles.auth.oauthButton}
@@ -283,7 +285,7 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
                 type="button"
               >
                 <FacebookIcon />
-                Login with <br/>Facebook
+                Facebook
               </button>
             </div>
             <div className={styles.auth.divider}>

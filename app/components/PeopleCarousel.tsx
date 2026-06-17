@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { styles } from "../styles";
-import portrait from "../images/about_2.jpg";
+import portrait from "../images/about_2.webp";
 
 type PersonCard = {
   name: string;

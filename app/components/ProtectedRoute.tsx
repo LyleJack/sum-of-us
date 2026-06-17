@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 import { useAuth } from "@clerk/clerk-react";
 import { useAuthModal } from "./AuthModal";
 
@@ -8,7 +8,6 @@ type ProtectedRouteProps = {
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-let navigate = useNavigate();
   const { isSignedIn, isLoaded } = useAuth();
   const { openAuthModal } = useAuthModal();
 
@@ -20,9 +19,7 @@ let navigate = useNavigate();
 
   if (!isLoaded) return null;
 
-  if (!isSignedIn) return (
-    navigate("/dashboard")
-  );
+  if (!isSignedIn) return <Navigate to="/" replace />;
 
   return <>{children}</>;
 }

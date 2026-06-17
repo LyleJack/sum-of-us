@@ -12,7 +12,6 @@
     - About image is slow to load
 
 New as of 16/06:
-- Change OAuth to be just "GOOGLE" AND "FACEBOOK" with `Log in with` above 
 - Need a way to handle closing the sidebar when "manage account" is clicked on mobile.
 - Size of user account page on mobile
 - Login seemed a bit flakey on mobile, didn't redirect properly originally, check the callback maybe

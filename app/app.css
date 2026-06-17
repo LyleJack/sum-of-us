@@ -31,7 +31,7 @@
   --radius-shell: 24px;
   --radius-card: 16px;
   --shadow-modal: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --app-bg-hover:   #252525;
+  --app-bg-hover: #252525;
   --card-mo-color: #CCC;
   --wallet-bg: #000000;
 }
@@ -145,9 +145,9 @@ body {
 
 .welcome-class-meta {
   position: absolute;
-  bottom: max(30%, 30dvh); 
-  left: 5dvh;  
-  display:grid;
+  bottom: max(30%, 30dvh);
+  left: 5dvh;
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.1;
   max-width: 34rem;
@@ -253,7 +253,7 @@ body {
   line-height: 1.2;
 }
 
-.welcome-feature-card p + p {
+.welcome-feature-card p+p {
   margin-top: 1.25rem;
 }
 
@@ -303,7 +303,7 @@ body {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(2rem, 4.9vw, 4.4rem);
   background: #f4e8e3;
-  padding: clamp(3rem, 5.9vw, 5.3125rem) clamp(1.5rem, 4.306vw, 3.875rem) ;
+  padding: clamp(3rem, 5.9vw, 5.3125rem) clamp(1.5rem, 4.306vw, 3.875rem);
 }
 
 .faqs-intro {
@@ -416,7 +416,7 @@ body {
   background-image: var(--about-hero-image);
   background-position: center 37.5%;
   background-repeat: no-repeat;
-  background-size:100dvw;
+  background-size: 100dvw;
 }
 
 .about-people-image {
@@ -433,13 +433,14 @@ body {
 
 /* Outer structural wrapper */
 .people-carousel-container {
-width: 100vw;               /* Force full screen viewport wide span */
+  width: 100vw;
+  /* Force full screen viewport wide span */
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  background-color: transparent; 
+  background-color: transparent;
   padding: 1rem 0;
   overflow: hidden;
 }
@@ -450,15 +451,17 @@ width: 100vw;               /* Force full screen viewport wide span */
   gap: 2rem;
   overflow-x: auto;
   padding: 1rem 1.5rem;
-  scroll-behavior: auto; 
-  touch-action: pan-y; 
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scroll-behavior: auto;
+  touch-action: pan-y;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
   cursor: grab;
 }
 
 .people-carousel-track::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .people-carousel-track:active {
@@ -466,14 +469,15 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 .people-carousel-card {
-  flex: 0 0 24rem; 
+  flex: 0 0 24rem;
   max-width: 75vw;
   background-color: #f4e8e3;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  user-select: none; /* Disables unwanted highlight text artifacts during drag */
+  user-select: none;
+  /* Disables unwanted highlight text artifacts during drag */
   box-shadow: 0 4px 20px rgba(44, 40, 39, 0.03);
 }
 
@@ -484,8 +488,10 @@ width: 100vw;               /* Force full screen viewport wide span */
   object-fit: cover;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
-  pointer-events: none; /* Shields the element from broken browser drag states */
-  filter: grayscale(100%); /* Matches the mono image look in your reference screenshot */
+  pointer-events: none;
+  /* Shields the element from broken browser drag states */
+  filter: grayscale(100%);
+  /* Matches the mono image look in your reference screenshot */
 }
 
 /* Content Container */
@@ -608,7 +614,7 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 .footer-social {
-   position: absolute;
+  position: absolute;
   right: 10vh;
   color: var(--accent);
 }
@@ -628,7 +634,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(329%) hue-rotate(319deg) brightness(107%) contrast(98%);
 }
 
-  @media (width >= 48rem) {
+@media (width >=48rem) {
   .welcome-background {
     min-height: 90vh;
   }
@@ -717,13 +723,13 @@ width: 100vw;               /* Force full screen viewport wide span */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 3.5rem; 
+  height: 3.5rem;
   padding: 0.5rem 1rem;
 }
 
 .site-nav-link-container {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
   gap: clamp(0.5rem, 2vw, 3rem);
 }
@@ -742,7 +748,7 @@ width: 100vw;               /* Force full screen viewport wide span */
 
 .site-nav-link:hover {
   color: var(--accent);
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .site-nav-user {
@@ -752,7 +758,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   line-height: 1.25rem;
 }
 
-@media (width >= 40rem) {
+@media (width >=40rem) {
   .site-nav-user {
     display: inline;
   }
@@ -843,7 +849,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   margin-top: clamp(2rem, 2.4vw, 3rem);
 }
 
-.auth-form > * + * {
+.auth-form>*+* {
   margin-top: clamp(17px, 1.25vw, 25.5px);
 }
 
@@ -947,13 +953,13 @@ width: 100vw;               /* Force full screen viewport wide span */
   width: 16px;
   height: 16px;
   border: 2px solid #ccc;
-  border-radius: 50%;        
+  border-radius: 50%;
   cursor: pointer;
   position: relative;
 }
 
 .auth-age-input:checked {
-  border-color: var(--accent);     
+  border-color: var(--accent);
 }
 
 .auth-age-input:checked::after {
@@ -1017,7 +1023,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   text-align: center;
   color: var(--text-muted);
   font-size: clamp(8px, 0.75vw, 18px);
-   white-space: nowrap;
+  white-space: nowrap;
 }
 
 .auth-footer-button {
@@ -1057,11 +1063,16 @@ width: 100vw;               /* Force full screen viewport wide span */
   box-shadow: 0 0 0 1px var(--accent);
 }
 
+.auth-oauth-header {
+  padding-top: 1rem;
+  font-weight: 700;
+}
+
 .auth-oauth-buttons {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -1522,7 +1533,7 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 .members-header {
-    padding: 5rem 1.5rem 1rem;
+  padding: 5rem 1.5rem 1rem;
 }
 
 .members-grid {
@@ -1567,7 +1578,8 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 .members-card {
-  background: #2C2827;;
+  background: #2C2827;
+  ;
   border-radius: 1rem;
   padding: 1.75rem;
   display: flex;
@@ -1688,7 +1700,7 @@ width: 100vw;               /* Force full screen viewport wide span */
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.members-checkbox:checked + .members-checkbox-indicator {
+.members-checkbox:checked+.members-checkbox-indicator {
   background: var(--accent);
   border-color: var(--accent);
 }
@@ -1935,16 +1947,28 @@ width: 100vw;               /* Force full screen viewport wide span */
 }
 
 @keyframes booking-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes booking-rise {
-  from { transform: translateY(10px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-@media (width >= 40rem) {
+@media (width >=40rem) {
   .auth-dialog {
     max-width: clamp(342px, 25vw, 513px);
     padding-inline: clamp(31px, 2.2vw, 46.5px);
@@ -1953,17 +1977,17 @@ width: 100vw;               /* Force full screen viewport wide span */
 
 
 @media (width < 48rem) {
-.welcome-background {
-    min-height: 0 !important;       
-    height: 70vh !important;       
-    max-height: 70vh !important;   
+  .welcome-background {
+    min-height: 0 !important;
+    height: 70vh !important;
+    max-height: 70vh !important;
   }
 
-  .site-nav > div {
+  .site-nav>div {
     padding-left: 0rem !important;
   }
 
-.site-nav:not(.menu-open) {
+  .site-nav:not(.menu-open) {
     position: fixed !important;
     top: 2.5vh !important;
     left: 2% !important;
@@ -1975,17 +1999,17 @@ width: 100vw;               /* Force full screen viewport wide span */
     justify-content: space-between !important;
     background: none !important;
     border-radius: var(--radius-pill) !important;
-    transition: none !important; 
+    transition: none !important;
     z-index: 20 !important;
   }
-  
+
   .site-nav.menu-open .site-nav-link,
   .site-nav.menu-open .primary-button-small {
     display: block !important;
-    width: max-content !important;    
+    width: max-content !important;
     margin-bottom: 1.25rem !important;
-    text-align: left !important;      
-    z-index: 20 !important;          
+    text-align: left !important;
+    z-index: 20 !important;
   }
 
   .site-nav:not(.menu-open) .site-nav-link,
@@ -2004,33 +2028,33 @@ width: 100vw;               /* Force full screen viewport wide span */
     right: 0 !important;
     left: auto !important;
     bottom: 0 !important;
-    width: 50vw !important;               
-    min-width: 230px !important;          
+    width: 50vw !important;
+    min-width: 230px !important;
     height: 100vh !important;
-    height: 100dvh !important;            
-    background: #211f1d !important;       
-    border-radius: 0 !important;          
+    height: 100dvh !important;
+    background: #211f1d !important;
+    border-radius: 0 !important;
     box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4) !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;   
+    align-items: flex-start !important;
     justify-content: flex-start !important;
-    padding: 6rem 2rem 2rem !important; 
+    padding: 6rem 2rem 2rem !important;
     overflow-y: auto !important;
-    z-index: 20 !important;            
+    z-index: 20 !important;
   }
 
   .site-nav.menu-open .primary-button-small {
     padding: 0.5rem 2rem !important;
-    align-self: flex-start !important;    
-    z-index: 20 !important;              
+    align-self: flex-start !important;
+    z-index: 20 !important;
   }
 
   .nav-burger-toggle,
   .site-nav button[class*="toggle"],
   .site-nav button[class*="burger"] {
     position: fixed !important;
-    top: calc(2.5vh + 1.6rem) !important; 
+    top: calc(2.5vh + 1.6rem) !important;
     right: 5vw !important;
     width: 1.75rem !important;
     height: 1.25rem !important;
@@ -2049,14 +2073,14 @@ width: 100vw;               /* Force full screen viewport wide span */
   .site-nav button[class*="toggle"]::before {
     content: "" !important;
     display: block !important;
-    width: 1.75rem !important;            
-    height: 2px !important;               
-    background: #f4ff3d !important;       
-    transition: none !important;          
-    box-shadow: 0 -6px 0 #f4ff3d, 0 6px 0 #f4ff3d !important; 
+    width: 1.75rem !important;
+    height: 2px !important;
+    background: #f4ff3d !important;
+    transition: none !important;
+    box-shadow: 0 -6px 0 #f4ff3d, 0 6px 0 #f4ff3d !important;
   }
 
-  
+
   .site-nav.menu-open .nav-burger-toggle::before,
   .site-nav.menu-open button[class*="toggle"]::before {
     background: transparent !important;
@@ -2066,7 +2090,7 @@ width: 100vw;               /* Force full screen viewport wide span */
     position: relative !important;
   }
 
-  
+
   .site-nav.menu-open .nav-burger-toggle::after,
   .site-nav.menu-open button[class*="toggle"]::after {
     content: "" !important;
@@ -2077,7 +2101,7 @@ width: 100vw;               /* Force full screen viewport wide span */
     transform: rotate(45deg) !important;
   }
 
-  
+
   .site-nav.menu-open .nav-burger-toggle::before,
   .site-nav.menu-open button[class*="toggle"]::before {
     content: "" !important;
@@ -2088,7 +2112,7 @@ width: 100vw;               /* Force full screen viewport wide span */
     transform: rotate(-45deg) !important;
   }
 
- .mobile-nav-backdrop {
+  .mobile-nav-backdrop {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -2096,9 +2120,9 @@ width: 100vw;               /* Force full screen viewport wide span */
     width: min(50vw, 100vw - 230px) !important;
     height: 100vh !important;
     height: 100dvh !important;
-    
+
     background: transparent !important;
-    z-index: 10 !important; 
+    z-index: 10 !important;
     cursor: pointer !important;
   }
 
@@ -2107,19 +2131,19 @@ width: 100vw;               /* Force full screen viewport wide span */
     position: relative;
   }
 
-  
+
   .welcome-class-meta {
-  position: absolute;
-  left: 5%;
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(1rem, 2vw, 2.25rem);
-  color: #f1e7e2;
-  line-height: 1.06;
-  bottom: clamp(5rem, 17.5%, 15rem);
-  flex-direction: column;
-  font-size: medium;
-}
+    position: absolute;
+    left: 5%;
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 2vw, 2.25rem);
+    color: #f1e7e2;
+    line-height: 1.06;
+    bottom: clamp(5rem, 17.5%, 15rem);
+    flex-direction: column;
+    font-size: medium;
+  }
 
   .welcome-class-logo {
     bottom: 5%;
@@ -2182,21 +2206,21 @@ width: 100vw;               /* Force full screen viewport wide span */
   .faqs-intro-title,
   .classes-intro-title,
   .about-title {
-    font-size: 2.5rem !important;      
+    font-size: 2.5rem !important;
     line-height: 1.1 !important;
     margin-bottom: 1rem !important;
   }
 
   .classes-intro-main,
   .about-intro-main {
-    font-size: 1.35rem !important;     
+    font-size: 1.35rem !important;
     line-height: 1.4 !important;
     max-width: 100% !important;
   }
 
   .classes-intro-notes,
   .about-intro-notes {
-    grid-template-columns: 1fr !important; 
+    grid-template-columns: 1fr !important;
     gap: 1.25rem !important;
     margin-top: 1.75rem !important;
   }
@@ -2207,7 +2231,7 @@ width: 100vw;               /* Force full screen viewport wide span */
     line-height: 1.5 !important;
   }
 
-  
+
   .classes-schedule-title {
     font-size: 1.85rem !important;
     line-height: 1.1 !important;
@@ -2332,7 +2356,7 @@ width: 100vw;               /* Force full screen viewport wide span */
     margin-top: 0.5rem !important;
   }
 
-    .booking {
+  .booking {
     width: 100%;
     border-radius: 18px;
     padding: 22px 18px 26px;
@@ -2389,4 +2413,3 @@ width: 100vw;               /* Force full screen viewport wide span */
   }
 
 }
-

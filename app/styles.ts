@@ -189,6 +189,7 @@ export const styles = {
     field: "auth-field",
     fieldControl: "auth-field-control",
     passwordToggle: "auth-password-toggle",
+    oauthHeader:  "auth-oauth-header",
     oauthButtons: "auth-oauth-buttons",
     oauthButton: "auth-oauth-button",
     divider: "auth-divider",

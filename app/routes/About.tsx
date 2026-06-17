@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { Page, PageStack } from "../components/UI";
-import background from "../images/about-1.jpg";
-import aboutPhoto from "../images/about_2.jpg";
+import background from "../images/about-1.webp";
+import aboutPhoto from "../images/about_2.webp";
 import { styles } from "../styles";
 import { JoinUsBanner } from "../components/JoinUsBanner";
 import { PeopleCarousel } from "../components/PeopleCarousel";
