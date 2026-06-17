@@ -3,12 +3,17 @@ import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router";
 import { styles } from "../styles";
 
-export function UserMenu() {
+interface UserMenuProps {
+  setNavBarShoudBeOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function UserMenu({ setNavBarShoudBeOpen }: UserMenuProps) {
   const { user } = useUser();
   const { signOut } = useClerk();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  
 
   // Close on outside click
   useEffect(() => {
@@ -79,6 +84,7 @@ export function UserMenu() {
             type="button"
             onClick={() => {
               setIsOpen(false);
+              setNavBarShoudBeOpen?.(false);
               navigate("/members");
             }}
           >

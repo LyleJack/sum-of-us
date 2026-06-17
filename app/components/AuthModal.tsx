@@ -127,7 +127,7 @@ function AuthModal({ mode, onClose, onModeChange }: AuthModalProps) {
       await signIn.authenticateWithRedirect({
         strategy,
         redirectUrl: `${window.location.origin}/sso-callback`,
-        redirectUrlComplete: window.location.origin,
+        redirectUrlComplete: `${window.location.origin}/members`,
       });
     } catch (caught) {
       setFormError(

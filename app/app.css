@@ -1538,16 +1538,10 @@ body {
 
 .members-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 2.5rem;
-}
-
-@media (min-width: 768px) {
-  .members-grid {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
 }
 
 .members-right-col {
@@ -1874,10 +1868,10 @@ body {
 }
 
 .user-menu-dropdown {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  min-width: 13rem;
+  position: fixed;
+  top: auto;
+  right: 10vw;
+  min-width: 15rem;
   background: #2c2c2c;
   border: 1px solid #3f3f46;
   border-radius: 0.75rem;
@@ -2357,7 +2351,7 @@ body {
   }
 
   .booking {
-    width: 100%;
+    width: 80%;
     border-radius: 18px;
     padding: 22px 18px 26px;
   }
@@ -2412,4 +2406,47 @@ body {
     padding: 28px 20px;
   }
 
+  .members-page {
+    padding: 1vh 5vw;
+  }
+
+  .members-header {
+    padding-bottom: 0;
+  }
+
+  .members-field {
+    display: flex ;
+    flex-direction: column ;
+    align-items: flex-start ;
+    gap: 0.25rem ;
+    grid-template-columns: none ;
+  }
+
+  .members-field-label {
+    width: 100% ;
+    margin-bottom: 0.25rem ;
+  }
+
+  .members-field-input {
+    width: 100% ;
+  }
+
+  .members-field-list {
+    width: 100% ;
+    max-width: 100% ;
+    padding: 0 1rem ;
+    box-sizing: border-box ;
+  }
+
+  .members-textarea {
+    width: 100% ;
+    padding: 0.5rem ;
+  }
+
+  .members-save-button {
+    width: 100% ;
+    min-height: 44px ;
+    padding: 0.75rem ;
+    margin-top: 1rem ;
+  }
 }

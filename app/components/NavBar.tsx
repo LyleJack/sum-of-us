@@ -10,9 +10,14 @@ import { UserMenu } from "./UserMenu";
 export function NavBar() {
   const { isLoaded, isSignedIn } = useAuth();
   const { openAuthModal } = useAuthModal();
-
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleCloseSidebar = () => {
+    setIsOpen(false);
+  };
+
+
 
   return (
     <nav className={`${styles.nav.shell} site-nav ${isOpen ? "menu-open" : ""}`}>
@@ -56,6 +61,7 @@ export function NavBar() {
         </div>
       </div>
 
+      {/* MOBILE SIDEBAR */}
       {isOpen && (
         <div
           className="mobile-nav-backdrop md:hidden"
@@ -74,7 +80,7 @@ export function NavBar() {
         <div className="border-t border-stone-700/30 pt-6 flex flex-col space-y-4">
           {!isLoaded ? null : isSignedIn ? (
             <div className="flex flex-col space-y-3 w-full">
-              <UserMenu />
+              <UserMenu setNavBarShoudBeOpen={setIsOpen} />
             </div>
           ) : (
             <button
@@ -110,7 +116,7 @@ function Logo({ isOpen }: { isOpen: boolean }) {
           src={classicLogo}
           alt="Sum Of Us Logo"
           className="site-nav-logo"
-          width={isOpen ? "175rem" : "auto"}
+          width={isOpen ? "175px" : "auto"}
         />
       </picture>
     </div>

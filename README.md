@@ -42,6 +42,7 @@ New as of 16/06:
 - Expand test coverage
     - Including mobile friendly tests
 - Forgot password flow, partially set up only (needs a please check spam too)
+- authenticate API calls using Clerk's JWT in an Authorization header
 
 
 ## Potential extras
