@@ -18,7 +18,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
   testDir: './tests',
-  /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -36,6 +35,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -44,15 +44,13 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'tablet',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 768, height: 1024 } },
     },
-
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'mobile',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 375, height: 667 }, isMobile: true },
     },
 
     /* Test against mobile viewports. */
@@ -83,4 +81,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-

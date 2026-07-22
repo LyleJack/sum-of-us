@@ -1,6 +1,4 @@
-import type { CSSProperties } from "react";
 import { Page } from "../components/UI";
-import background from "../images/welcome-background.webp";
 import classPhoto from "../images/classes-image-2.webp";
 import { styles } from "../styles";
 import { JoinUsBanner } from "../components/JoinUsBanner";
@@ -8,11 +6,7 @@ import { JoinUsBanner } from "../components/JoinUsBanner";
 export default function Classes() {
   return (
     <Page className={styles.classes.page}>
-        <section
-          className={styles.classes.hero}
-          aria-label="Self-defence classes"
-          style={{ "--background-image": `url(${background})` } as CSSProperties}
-        />
+        <section className={styles.classes.hero} aria-label="Self-defence classes" />
 
         <section className={styles.classes.intro} aria-labelledby="classes-intro-title">
           <h1 id="classes-intro-title" className={styles.classes.introTitle}>

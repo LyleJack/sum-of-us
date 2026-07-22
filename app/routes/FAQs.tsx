@@ -1,8 +1,6 @@
 import { Page, PageStack } from "../components/UI";
 import { JoinUsBanner } from "../components/JoinUsBanner";
-import background from "../images/faqs-background.webp";
 import { styles } from "../styles";
-import type { CSSProperties } from "react";
 import { useState } from "react";
 
 interface AccordionItem {
@@ -53,18 +51,17 @@ function Accordion() {
       {faqData.map((item, index) => {
         const isOpen = openIndex === index;
         return (
-          <div 
+          <div
             key={index} 
             className={`accordion-item ${isOpen ? "is-open" : ""}`}
-            onClick={() => toggleAccordion(index)}
           >
-            <div className="accordion-header">
+            <button className="accordion-header" type="button" onClick={() => toggleAccordion(index)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`}>
               <h3 className="accordion-question">{item.question}</h3>
               <span className="accordion-toggle-icon">
                 {isOpen ? "−" : "+"}
               </span>
-            </div>
-            <div className="accordion-content">
+            </button>
+            <div className="accordion-content" id={`faq-answer-${index}`}>
               <p className="accordion-answer">{item.answer}</p>
             </div>
           </div>
@@ -78,11 +75,7 @@ export default function FAQs() {
   return (
     <Page className={styles.faqs.page}>
       <PageStack className={styles.faqs.stack}>
-        <section
-          className={styles.faqs.hero}
-          aria-label="Self-defence classes"
-          style={{ "--background-image": `url(${background})` } as CSSProperties}
-        />
+        <section className={styles.faqs.hero} aria-label="Self-defence classes" />
 
         <section className={styles.faqs.intro} aria-labelledby="faqs-intro-title">
           <h1 id="faqs-intro-title" className={styles.faqs.introTitle}>

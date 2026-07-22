@@ -19,10 +19,11 @@ export default function Footer() {
               <p>Connect with us</p>
               <div>
                 {/* TODO: placeholder links to about page, update with actual links to socials */}
+                { /* Maybe add something for linkedin too https://www.linkedin.com/company/sum-of-us-self-defence/about/ */}
                 <Link to="/about" aria-label="Facebook">
                   <img src={facebookLogo} alt="Facebook" />
                 </Link>
-                <Link to="/about" aria-label="Instagram">
+                <Link to="https://www.instagram.com/sum.of.us.selfdefence" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                   <img src={instaLogo} alt="Instagram" />
                 </Link>
               </div>

@@ -1,7 +1,5 @@
-import type { CSSProperties } from "react";
 import { Link } from "react-router";
 import { Page, PageStack } from "../components/UI";
-import background from "../images/welcome-background.webp";
 import bigLogo from "../images/big-logo.svg";
 import communityPhoto from "../images/welcome-community.jpg";
 import beachPhoto from "../images/welcome-beach.jpg";
@@ -12,10 +10,8 @@ export function Welcome() {
   return (
     <Page className={styles.welcome.page}>
       <PageStack className={styles.welcome.stack}>
-        <div
-          className={styles.welcome.background}
-          style={{ "--welcome-background-image": `url(${background})` } as CSSProperties}
-        >
+        <div className={styles.welcome.background}>
+          <div className={styles.welcome.heroContent}>
           <div className={styles.welcome.classMeta}>
             <p>
               Self-defence classes<br />
@@ -27,6 +23,7 @@ export function Welcome() {
             </p>
           </div>
           <img src={bigLogo} alt="Sum of Us" className={styles.welcome.classLogo} />
+          </div>
         </div>
         <section className={styles.welcome.intro} aria-labelledby="welcome-intro-title">
           <h1 id="welcome-intro-title" className={styles.welcome.introTitle}>
@@ -63,7 +60,7 @@ export function Welcome() {
               You just need to show up.
             </p>
           </article>
-          <article className={styles.welcome.featureCard} style={{  "background": "#faf7f2" }}>
+          <article className={styles.welcome.featureCardLight}>
             <h2>A fun space <br />for everyone</h2>
             <p>
               Each class is simple and structured so you know what to expect.

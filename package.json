@@ -7,6 +7,10 @@
     "dev": "vite",
     "start": "vite preview",
     "typecheck": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
     "deploy": "npm run build && wrangler deploy",
     "preview": "npm run build && wrangler dev"
   },
@@ -21,15 +25,21 @@
     "react-router": "^7.17.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@cloudflare/vite-plugin": "^1.39.1",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.10",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
     "vite": "^8.0.3",
+    "vitest": "^4.1.10",
     "wrangler": "^4.96.0"
   }
 }

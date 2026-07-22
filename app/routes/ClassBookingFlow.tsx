@@ -1,471 +1,178 @@
-import { useState, useMemo, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
+import { useNavigate, useSearchParams } from "react-router";
+import { FeedbackDialog, type FeedbackTone } from "../components/FeedbackDialog";
+import { useAuthModal } from "../components/AuthModal";
 import { styles } from "../styles";
 
 export interface ClassBookingFlowProps {
   activeMembership?: boolean;
   freeTrial?: boolean;
-  excludedDates?: Record<string, boolean>; // expected format: { "2026-06-17": false }
+  excludedDates?: Record<string, boolean>;
 }
 
-type Screen         = "select" | "payment";
-type Tab            = "byClass" | "monthly";
-type ConfirmVariant = "class" | "monthly" | "freeTrial" | "member";
+type Tab = "byClass" | "monthly";
+type CheckoutConfirmation = { status: "confirmed"; purchaseType: "class" | "monthly"; classCount?: number; months?: number };
+type BookingContext = { activeMembership: boolean; freeTrial: boolean; excludedDates: Record<string, boolean> };
+type Feedback = { tone: FeedbackTone; title: string; body: string; actionLabel?: string; onAction?: () => void; dismissible?: boolean };
 
-const MONTHS = [
-  "January", "February", "March",     "April",   "May",      "June",
-  "July",    "August",   "September", "October", "November", "December",
-];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-function toKey(d: Date): string {
-  const y  = d.getFullYear();
-  const mo = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${y}-${mo}-${dd}`;
+function toKey(date: Date) {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function getClassDates(
-  excluded: Record<string, boolean> = {},
-  max = 6,
-): Date[] {
-  const classDates: Date[] = [];
+export function getClassDates(excluded: Record<string, boolean> = {}, max = 6): Date[] {
+  const dates: Date[] = [];
   const day = new Date();
   day.setHours(0, 0, 0, 0);
-
-  while (classDates.length < max) {
-    const dow = day.getDay(); // 2 = Tuesday, 4 = Thursday
-    if ((dow === 2 || dow === 4) && excluded[toKey(day)] !== false) {
-      classDates.push(new Date(day));
-    }
+  while (dates.length < max) {
+    if ((day.getDay() === 2 || day.getDay() === 4) && excluded[toKey(day)] !== false) dates.push(new Date(day));
     day.setDate(day.getDate() + 1);
   }
-  return classDates;
+  return dates;
 }
 
+export async function bookingApi(path: string, token: string | null, init?: RequestInit) {
+  const response = await fetch(path, {
+    ...init,
+    headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}), ...init?.headers },
+  });
+  if (!response.ok) {
+    const body = await response.json().catch(() => null) as { message?: string } | null;
+    throw new Error(body?.message ?? "We couldn't complete your booking. Please try again.");
+  }
+  return response.json();
+}
 
-/**  
-  ||| PLACEHOLDER CODE |||
- TODO: check if Stripe handles this and then remove it later if so 
- Format raw digits as "1234 5678 9012 3456" */
-const fmtCard = (v: string) =>
-  v.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ");
-
-/** Format raw digits as "MM / YY" */
-const fmtExpiry = (v: string) => {
-  const d = v.replace(/\D/g, "").slice(0, 4);
-  return d.length > 2 ? `${d.slice(0, 2)} / ${d.slice(2)}` : d;
-};
-
-export function ClassBookingFlow({
-  activeMembership = false,
-  freeTrial        = false,
-  excludedDates    = {},
-}: ClassBookingFlowProps) {
-
-  // ── State ────────────────────────────────────────────────────────
-
-  const showTabs = !activeMembership && !freeTrial;
-
-  const [tab,      setTab]      = useState<Tab>("byClass");
-  const [screen,   setScreen]   = useState<Screen>("select");
+export function ClassBookingFlow({ activeMembership: activeMembershipOverride, freeTrial: freeTrialOverride, excludedDates: excludedDatesOverride }: ClassBookingFlowProps) {
+  const { isLoaded, isSignedIn, getToken } = useAuth();
+  const { openAuthModal } = useAuthModal();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [tab, setTab] = useState<Tab>("byClass");
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [confirm,  setConfirm]  = useState<ConfirmVariant | null>(null);
+  const [isStartingCheckout, setIsStartingCheckout] = useState(false);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [bookingContext, setBookingContext] = useState<BookingContext>({ activeMembership: false, freeTrial: false, excludedDates: {} });
 
-  // Card form fields (Stripe placeholder — swap body of handlePay for real integration)
-  const [cardName,   setCardName]   = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiry, setCardExpiry] = useState("");
-  const [cardCvc,    setCardCvc]    = useState("");
-
-
-  const dates       = useMemo(() => getClassDates(excludedDates), []);
-  const isMonthly   = tab === "monthly";
+  const activeMembership = activeMembershipOverride ?? bookingContext.activeMembership;
+  const freeTrial = freeTrialOverride ?? bookingContext.freeTrial;
+  const excludedDates = excludedDatesOverride ?? bookingContext.excludedDates;
+  const isMonthly = tab === "monthly";
   const datesLocked = activeMembership || isMonthly;
+  const dates = useMemo(() => getClassDates(excludedDates), [excludedDates]);
+  const canContinue = activeMembership || freeTrial || isMonthly || selected.size > 0;
 
-  const canContinue =
-    activeMembership || freeTrial || isMonthly || selected.size > 0;
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn) return;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const result = await bookingApi("/api/booking-context", await getToken()) as Partial<BookingContext>;
+        if (!cancelled) setBookingContext({ activeMembership: result.activeMembership ?? false, freeTrial: result.freeTrial ?? false, excludedDates: result.excludedDates ?? {} });
+      } catch {
+        // The public UI remains usable until the documented booking-context endpoint is deployed.
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [getToken, isLoaded, isSignedIn]);
 
-  const ctaLabel =
-    freeTrial ? "Book your trial class" : activeMembership ? "Continue" : "Continue to payment";
+  // TODO: double check this against stripe docs
+  const verifyCheckout = useCallback(async (sessionId: string) => {
+    setFeedback({ tone: "loading", title: "Confirming your payment", body: "We’re checking your secure payment with Stripe. Please keep this window open." });
+    try {
+      const result = await bookingApi(`/api/checkout-sessions/${encodeURIComponent(sessionId)}`, await getToken()) as CheckoutConfirmation;
+      if (result.status !== "confirmed") throw new Error("Your payment is still being confirmed. Please try again shortly.");
+      const quantity = result.purchaseType === "monthly" ? result.months ?? 1 : result.classCount ?? 1;
+      const unit = result.purchaseType === "monthly" ? "month" : "class";
+      const label = quantity === 1 ? unit : result.purchaseType === "monthly" ? "months" : "classes";
+      setFeedback({ tone: "success", title: "You’re booked!", body: `You are now booked for ${quantity} ${label}.`, actionLabel: "Continue", onAction: () => navigate("/members") });
+      setSearchParams({}, { replace: true });
+    } catch (error) {
+      setFeedback({ tone: "error", title: "We couldn’t confirm your payment", body: error instanceof Error ? error.message : "Please try again.", actionLabel: "Try again", onAction: () => void verifyCheckout(sessionId), dismissible: true });
+    }
+  }, [getToken, navigate, setSearchParams]);
 
-  const selectHeading =
-    activeMembership ? "No Booking Required"
-    : isMonthly      ? "All Classes, One Monthly Fee"
-    :                  "Select your class";
+  useEffect(() => {
+    const checkout = searchParams.get("checkout");
+    const sessionId = searchParams.get("session_id");
+    if (!checkout) return;
+    if (checkout === "cancel") {
+      setFeedback({ tone: "neutral", title: "Checkout cancelled", body: "Your selected classes have not been booked.", actionLabel: "Return to booking", onAction: () => { setFeedback(null); setSearchParams({}, { replace: true }); }, dismissible: true });
+      return;
+    }
+    if (checkout !== "success" || !sessionId || !isLoaded) return;
+    if (!isSignedIn) {
+      openAuthModal("login");
+      return;
+    }
+    void verifyCheckout(sessionId);
+  }, [isLoaded, isSignedIn, openAuthModal, searchParams, setSearchParams, verifyCheckout]);
 
-  const selectSubtext =
-    activeMembership
-      ? "Feel free to drop into any class — your active membership has you covered, no booking needed."
-    : isMonthly
-      ? "With a monthly membership, every Tuesday and Thursday class is open to you."
-    :   "Click to select your preferred date";
+  const toggleDate = useCallback((key: string) => {
+    if (datesLocked) return;
+    setSelected((previous) => {
+      const next = new Set(previous);
+      if (next.has(key)) next.delete(key);
+      else { if (freeTrial) next.clear(); next.add(key); }
+      return next;
+    });
+  }, [datesLocked, freeTrial]);
 
-  const toggleDate = useCallback(
-    (key: string) => {
-      if (datesLocked) return;
-      setSelected((prev) => {
-        const next = new Set(prev);
-        if (next.has(key)) {
-          next.delete(key);
-        } else {
-          if (freeTrial) next.clear();
-          next.add(key);
-        }
-        return next;
-      });
-    },
-    [datesLocked, freeTrial],
-  );
-
-  const handleContinue = () => {
-    if (freeTrial)          setConfirm("freeTrial");
-    else if (activeMembership) setConfirm("member");
-    else                    setScreen("payment");
+  const requireSignedIn = () => {
+    if (isLoaded && isSignedIn) return true;
+    openAuthModal("login");
+    return false;
   };
 
-  const handlePay = () => {
-    // TODO: swap for real Stripe call — e.g. stripe.confirmPayment(...)
-    setConfirm(isMonthly ? "monthly" : "class");
+  // TOOD: double check against stripe documentation once we have a backend
+  const startCheckout = async () => {
+    if (!canContinue || !requireSignedIn()) return;
+    setIsStartingCheckout(true);
+    setFeedback({ tone: "loading", title: "Opening secure checkout", body: "You’ll be redirected to Stripe to enter payment details." });
+    try {
+      const payload = isMonthly ? { kind: "monthly" } : { kind: "class", classDates: [...selected] };
+      // Backend required: validate date availability and Clerk identity, then return Stripe's hosted Checkout URL.
+      const result = await bookingApi("/api/checkout-sessions", await getToken(), { method: "POST", body: JSON.stringify(payload) }) as { url?: string };
+      if (!result.url) throw new Error("Checkout could not be started. Please try again.");
+      window.location.assign(result.url);
+    } catch (error) {
+      setIsStartingCheckout(false);
+      setFeedback({ tone: "error", title: "Checkout couldn’t start", body: error instanceof Error ? error.message : "Please try again.", actionLabel: "Try again", onAction: () => void startCheckout(), dismissible: true });
+    }
   };
 
-  const handleConfirmOk = () => {
-    setConfirm(null);
-    // TODO: navigate to membership screen
+  const bookWithoutPayment = async () => {
+    if (!requireSignedIn()) return;
+    setFeedback({ tone: "loading", title: "Saving your booking", body: "Please keep this window open." });
+    try {
+      const token = await getToken();
+      if (freeTrial) {
+        await bookingApi("/api/bookings/free-trial", token, { method: "POST", body: JSON.stringify({ classDate: [...selected][0] }) });
+        setFeedback({ tone: "success", title: "You’re booked!", body: "Your free trial class is all set.", actionLabel: "Continue", onAction: () => navigate("/members") });
+      } else {
+        await bookingApi("/api/bookings/member-drop-in", token, { method: "POST", body: JSON.stringify({}) });
+        setFeedback({ tone: "success", title: "You’re booked!", body: "Your active membership has you covered.", actionLabel: "Continue", onAction: () => navigate("/members") });
+      }
+    } catch (error) {
+      setFeedback({ tone: "error", title: "We couldn’t save your booking", body: error instanceof Error ? error.message : "Please try again.", actionLabel: "Try again", onAction: () => void bookWithoutPayment(), dismissible: true });
+    }
   };
 
-  const switchTab = (t: Tab) => {
-    setTab(t);
-    setScreen("select");
-    setSelected(new Set());
-  };
+  const onContinue = () => { if (freeTrial || activeMembership) void bookWithoutPayment(); else void startCheckout(); };
+  const switchTab = (nextTab: Tab) => { setTab(nextTab); setSelected(new Set()); };
 
-  return (
-    <div className={styles.booking.shell}>
-      {showTabs && (
-        <nav className={styles.booking.tabs.nav} aria-label="Payment type">
-          {(["byClass", "monthly"] as Tab[]).map((t) => (
-            <button
-              key={t}
-              className={tab === t ? styles.booking.tabs.tabOn : styles.booking.tabs.tab}
-              onClick={() => switchTab(t)}
-              aria-current={tab === t ? "page" : undefined}
-            >
-              {t === "byClass" ? "Pay by Class" : "Pay Monthly"}
-            </button>
-          ))}
-        </nav>
-      )}
-      {screen === "select" && (
-        <>
-          <h1 className={styles.booking.heading}>{selectHeading}</h1>
-          <p  className={styles.booking.sub}>{selectSubtext}</p>
-
-          <div
-            className={datesLocked ? styles.booking.grid.locked : styles.booking.grid.normal}
-            role="group"
-            aria-label="Available class dates"
-          >
-            {dates.map((date) => {
-              const key = toKey(date);
-              const isOn = selected.has(key);
-
-              return (
-                <button
-                  key={key}
-                  className={
-                    datesLocked ? styles.booking.card.locked
-                    : isOn      ? styles.booking.card.selected
-                    :             styles.booking.card.normal
-                  }
-                  onClick={() => toggleDate(key)}
-                  aria-pressed={!datesLocked ? isOn : undefined}
-                  tabIndex={datesLocked ? -1 : 0}
-                >
-                  <span className={styles.booking.card.mo}>{MONTHS[date.getMonth()]}</span>
-                  <span className={styles.booking.card.day}>{date.getDate()}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            className={canContinue ? styles.booking.cta.base : styles.booking.cta.dim}
-            onClick={handleContinue}
-            disabled={!canContinue}
-          >
-            {ctaLabel}
-          </button>
-          
-        </>
-      )}
-
-
-      {/* TODO: || TO BE REPLACED BY STRIPE || */}
-      {screen === "payment" && (
-        <>
-          <h1 className={styles.booking.heading}>Payment options</h1>
-          <p  className={styles.booking.sub}>
-            {isMonthly
-              ? "Set up your monthly recurring membership"
-              : "Select how you want to pay"}
-          </p>
-
-          <div className={styles.booking.payment.divider} />
-          <span className={styles.booking.payment.sectionLabel}>Pay with card</span>
-
-          {/* Stripe placeholder — replace inputs with <Elements> from @stripe/react-stripe-js */}
-          <div className={styles.booking.payment.form}>
-            <input
-              className={styles.booking.payment.inp}
-              placeholder="Name on card"
-              value={cardName}
-              onChange={(e) => setCardName(e.target.value)}
-              autoComplete="cc-name"
-            />
-            <div className={styles.booking.payment.inpRow}>
-              <input
-                className={styles.booking.payment.inpWithGrow}
-                placeholder="Card number"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(fmtCard(e.target.value))}
-                inputMode="numeric"
-                autoComplete="cc-number"
-                maxLength={19}
-              />
-              <input
-                className={styles.booking.payment.inpCvc}
-                placeholder="CVC"
-                value={cardCvc}
-                onChange={(e) =>
-                  setCardCvc(e.target.value.replace(/\D/g, "").slice(0, 4))
-                }
-                inputMode="numeric"
-                autoComplete="cc-csc"
-                maxLength={4}
-              />
-            </div>
-            <input
-              className={styles.booking.payment.inp}
-              placeholder="MM / YY"
-              value={cardExpiry}
-              onChange={(e) => setCardExpiry(fmtExpiry(e.target.value))}
-              inputMode="numeric"
-              autoComplete="cc-exp"
-              maxLength={7}
-            />
-
-            <button className={styles.booking.cta.withGap} onClick={handlePay}>
-              {isMonthly ? "Subscribe monthly" : "Pay with card (CONTINUE)"}
-            </button>
-          </div>
-
-          <div className={styles.booking.payment.divider} />
-          <span className={styles.booking.payment.sectionLabel}>Or checkout with</span>
-
-          <div className={styles.booking.payment.wallets}>
-            <button
-              className={styles.booking.payment.wallet}
-              onClick={handlePay}
-              aria-label="Pay with Google Pay"
-            >
-              <GooglePayLogo />
-            </button>
-            <button
-              className={styles.booking.payment.wallet}
-              onClick={handlePay}
-              aria-label="Pay with Apple Pay"
-            >
-              <ApplePayLogo />
-            </button>
-          </div>
-
-          {isMonthly && (
-            <p className={styles.booking.payment.fine}>
-              Billed monthly. Cancel anytime in your account settings.
-            </p>
-          )}
-        </>
-      )}
-
-      {confirm && (
-        <div
-          className={styles.booking.modal.overlay}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="booking-confirm-heading"
-        >
-          <div className={styles.booking.modal.dialog}>
-            <div className={styles.booking.modal.check} aria-hidden="true">✓</div>
-
-            <h2 className={styles.booking.modal.heading} id="booking-confirm-heading">
-              {confirm === "freeTrial" ? "You're In!"
-                : confirm === "member"  ? "See You There!"
-                : confirm === "monthly" ? "Membership Confirmed!"
-                :                        "Booking Confirmed!"}
-            </h2>
-
-            <p className={styles.booking.modal.body}>
-              {confirm === "freeTrial"
-                ? "Your free trial class is all set. Expect a confirmation email shortly."
-                : confirm === "member"
-                ? "Just show up — no booking needed with your active membership."
-                : confirm === "monthly"
-                ? "Welcome! Your monthly membership is now active. Check your email for details."
-                : "Your class is booked. You'll receive a confirmation email soon."}
-            </p>
-
-            <button className={styles.booking.modal.ok} onClick={handleConfirmOk}>
-              OK
-            </button>
-          </div>
-        </div>
-      )}
-
+  return <div className={styles.booking.shell} aria-busy={isStartingCheckout || feedback?.tone === "loading"}>
+    {!activeMembership && !freeTrial && <nav className={styles.booking.tabs.nav} aria-label="Payment type">
+      {(["byClass", "monthly"] as Tab[]).map((value) => <button key={value} className={tab === value ? styles.booking.tabs.tabOn : styles.booking.tabs.tab} onClick={() => switchTab(value)} aria-current={tab === value ? "page" : undefined} disabled={isStartingCheckout}>{value === "byClass" ? "Pay by Class" : "Pay Monthly"}</button>)}
+    </nav>}
+    <h1 className={styles.booking.heading}>{activeMembership ? "No Booking Required" : isMonthly ? "All Classes, One Monthly Fee" : "Select your class"}</h1>
+    <p className={styles.booking.sub}>{activeMembership ? "Feel free to drop into any class — your active membership has you covered, no booking needed." : isMonthly ? "With a monthly membership, every Tuesday and Thursday class is open to you." : "Click to select your preferred date"}</p>
+    <div className={datesLocked ? styles.booking.grid.locked : styles.booking.grid.normal} role="group" aria-label="Available class dates">
+      {dates.map((date) => { const key = toKey(date); const isOn = selected.has(key); return <button key={key} className={datesLocked ? styles.booking.card.locked : isOn ? styles.booking.card.selected : styles.booking.card.normal} onClick={() => toggleDate(key)} aria-pressed={!datesLocked ? isOn : undefined} tabIndex={datesLocked ? -1 : 0} disabled={isStartingCheckout}><span className={styles.booking.card.mo}>{MONTHS[date.getMonth()]}</span><span className={styles.booking.card.day}>{date.getDate()}</span></button>; })}
     </div>
-  );
-}
-
-
-
-/* TODO: replace logos properly/see if stripe provides them */
-function GooglePayLogo() {
-  return (
-    <svg
-      width="76" height="20" viewBox="0 0 76 20"
-      fill="none" aria-hidden="true"
-    >
-      {/* Multicolour G mark */}
-      <path d="M9.62 8.64H5.82v1.56h2.19c-.21 1.05-1.12 1.7-2.19 1.7-1.3 0-2.35-1.05-2.35-2.35 0-1.3 1.05-2.35 2.35-2.35.57 0 1.1.21 1.5.55l1.11-1.1A3.85 3.85 0 005.83 5.5 4.05 4.05 0 001.78 9.55a4.05 4.05 0 004.05 4.05 3.72 3.72 0 003.84-3.84c0-.38-.04-.73-.05-1.12z" fill="#4285F4"/>
-      <path d="M2.78 7.6 1.54 6.7A4.02 4.02 0 000 9.55c0 1.04.38 1.98 1 2.7l1.24-.96a2.5 2.5 0 01-.46-1.74c0-.67.22-1.3.58-1.95z" fill="#FBBC05"/>
-      <path d="M5.83 13.6c1.0 0 1.87-.33 2.5-.9L7.1 11.6c-.36.25-.82.4-1.27.4-1.05 0-1.96-.7-2.26-1.66L2.24 11.4a4.05 4.05 0 003.59 2.2z" fill="#34A853"/>
-      <path d="M9.62 8.64c0-.38-.04-.73-.1-1.07l-3.69.01v1.56h2.19c-.1.37-.3.7-.57.97l1.23 1.1a3.69 3.69 0 00.94-2.57z" fill="#EA4335"/>
-      {/* "Pay" wordmark */}
-      <text x="14" y="14.5"
-        fontFamily="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-        fontSize="13" fontWeight="500" fill="white" letterSpacing="0.2">
-        Pay
-      </text>
-    </svg>
-  );
-}
-
-function ApplePayLogo() {
-  return (
-    <svg
-      width="72" height="20" viewBox="0 0 72 20"
-      fill="white" aria-hidden="true"
-    >
-      {/* Apple mark */}
-      <path d="M7.7 4.1c.44-.54.74-1.28.66-2.04-.64.06-1.42.43-1.88.97-.41.47-.77 1.22-.67 1.94.71.05 1.44-.36 1.89-.87zm.62.89C7.22 4.9 6.42 5.5 5.9 5.5c-.5 0-1.3-.55-2.07-.53-1.06.02-2.04.62-2.58 1.57-1.1 1.9-.28 4.72.78 6.27.52.77 1.14 1.62 1.96 1.59.78-.03 1.08-.5 2.01-.5.93 0 1.2.5 2.03.48.85-.02 1.38-.77 1.9-1.54.6-.88.84-1.74.86-1.79 0 0-1.65-.64-1.67-2.52-.02-1.57 1.28-2.32 1.34-2.37-.74-1.08-1.88-1.2-2.28-1.23l.04.03z"/>
-      {/* "Pay" wordmark */}
-      <text x="14" y="14.5"
-        fontFamily="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-        fontSize="13" fontWeight="400" fill="white" letterSpacing="0.2">
-        Pay
-      </text>
-    </svg>
-  );
-}
-
-
-// ═══════════════════════════════════════════════════════════════════
-// Demo wrapper  (default export — dev / Storybook preview only)
-// ═══════════════════════════════════════════════════════════════════
-
-const DEMO_CSS = `
-  .booking-demo {
-    min-height: 100vh;
-    background: #1A1815;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 16px;
-    gap: 24px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-  }
-  .booking-demo-controls {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .booking-demo-toggle {
-    background: #2B2826;
-    border: 1.5px solid #3A3733;
-    border-radius: 50px;
-    color: #70706D;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 7px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    transition: border-color 0.15s, color 0.15s;
-    font-family: inherit;
-  }
-  .booking-demo-toggle[data-on="true"] {
-    border-color: #D4F046;
-    color: #D4F046;
-  }
-  .booking-demo-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-  .booking-demo-hint {
-    font-size: 11px;
-    color: white;
-    letter-spacing: 0.04em;
-  }
-`;
-
-export default function Demo() {
-  const [activeMembership, setActiveMembership] = useState(false);
-  const [freeTrial,        setFreeTrial]        = useState(false);
-
-  const toggleMember = () => {
-    setActiveMembership((v) => !v);
-    setFreeTrial(false);
-  };
-
-  const toggleTrial = () => {
-    setFreeTrial((v) => !v);
-    setActiveMembership(false);
-  };
-
-  return (
-    <>
-      <style>{DEMO_CSS}</style>
-            <ClassBookingFlow
-          key={`${activeMembership}-${freeTrial}`}
-          activeMembership={activeMembership}
-          freeTrial={freeTrial}
-        />
-
-        <div className="booking-demo-controls">
-          <button
-            className="booking-demo-toggle"
-            data-on={String(activeMembership)}
-            onClick={toggleMember}
-          >
-            <span className="booking-demo-dot" />
-            activeMembership
-          </button>
-          <button
-            className="booking-demo-toggle"
-            data-on={String(freeTrial)}
-            onClick={toggleTrial}
-          >
-            <span className="booking-demo-dot" />
-            freeTrial
-          </button>
-        </div>
-        <p className="booking-demo-hint">
-          For Demo Purposes only toggle props above · select dates · walk through the full flow
-        </p>
-      {/* </div> */}
-    </>
-  );
+    <button className={canContinue ? styles.booking.cta.base : styles.booking.cta.dim} onClick={onContinue} disabled={!canContinue || isStartingCheckout || feedback?.tone === "loading"}>{isStartingCheckout ? "Opening secure checkout…" : freeTrial ? "Book your trial class" : activeMembership ? "Continue" : "Continue to payment"}</button>
+    {feedback && <FeedbackDialog title={feedback.title} body={feedback.body} tone={feedback.tone} actionLabel={feedback.actionLabel} onAction={feedback.onAction} onClose={feedback.dismissible ? () => setFeedback(null) : undefined} />}
+  </div>;
 }

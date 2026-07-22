@@ -1,6 +1,4 @@
-import type { CSSProperties } from "react";
 import { Page, PageStack } from "../components/UI";
-import background from "../images/about-1.webp";
 import aboutPhoto from "../images/about_2.webp";
 import { styles } from "../styles";
 import { JoinUsBanner } from "../components/JoinUsBanner";
@@ -10,11 +8,7 @@ export default function About() {
   return (
     <Page className={styles.about.page}>
       <PageStack className={styles.about.stack}>
-        <section
-          className={styles.about.hero}
-          aria-label="Self-defence about"
-          style={{ "--about-hero-image": `url(${background})` } as CSSProperties}
-        />
+        <section className={styles.about.hero} aria-label="Self-defence about" />
 
         <section className={styles.about.intro} aria-labelledby="about-intro-title">
           <h1 id="about-intro-title" className={styles.about.title}>
