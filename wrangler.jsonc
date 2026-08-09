@@ -1,20 +1,12 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"compatibility_date": "2026-06-02",
+	"compatibility_date": "2026-08-10",
 	"observability": {
 		"enabled": true
 	},
 	"assets": {
 		"not_found_handling": "single-page-application"
 	},
-	"d1_databases": [
-		{
-			"binding": "SUM_OF_US_DB",
-			"database_name": "sum_of_us_db",
-			"database_id": "96e0a3cb-041a-4eb7-9d2f-8249aac579b6",
-			"remote": true
-		}
-	],
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
