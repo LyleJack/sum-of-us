@@ -1,6 +1,5 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "sum-of-us-dev",
 	"compatibility_date": "2026-06-02",
 	"observability": {
 		"enabled": true
@@ -18,5 +17,16 @@
 	],
 	"compatibility_flags": [
 		"nodejs_compat"
-	]
+	],
+  "env": {
+    "production": {
+      "name": "sum-of-us",
+      "routes": [
+        {
+          "pattern": "sumofus.co.uk/*",
+          "zone_name": "someofus.co.uk"
+        }
+      ]
+    }
+  }
 }
