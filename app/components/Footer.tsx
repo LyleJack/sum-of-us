@@ -23,7 +23,7 @@ export default function Footer() {
                 <Link to="/about" aria-label="Facebook">
                   <img src={facebookLogo} alt="Facebook" />
                 </Link>
-                <Link to="https://www.instagram.com/sum.of.us.selfdefence" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <Link to="https://www.facebook.com/people/Sum-of-Us/61592887089682/" aria-label="Facebook"  target="_blank" rel="noopener noreferrer">
                   <img src={instaLogo} alt="Instagram" />
                 </Link>
               </div>
