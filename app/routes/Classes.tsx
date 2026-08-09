@@ -1,7 +1,6 @@
 import { Page } from "../components/UI";
 import classPhoto from "../images/classes-image-2.webp";
 import { styles } from "../styles";
-import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export default function Classes() {
   return (
@@ -42,7 +41,7 @@ export default function Classes() {
               <p className={styles.classes.scheduleDetails}>
                 Tuesdays — 7pm<br />
                 Thursdays — 7pm<br />
-                Location: [area / venue]
+                Location: [venue TBC]
               </p>
               <p className={styles.classes.scheduleNote}>
                 Just wear something comfortable*.
@@ -60,8 +59,6 @@ export default function Classes() {
             className={styles.classes.scheduleImage}
           />
         </section>
-
-        <JoinUsBanner />
       </Page>
   );
 }

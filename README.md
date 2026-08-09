@@ -25,9 +25,6 @@ New as of 16/06:
 - Cleaning up CSS at some point
 - Go through and fix styles to match the figma better
 
-- AI pass at CSS to try and improve responsiveness
-- AI QA pass
-
 - Set up prod versions
 - More tests
 - Look into miniflare mocking

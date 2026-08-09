@@ -28,7 +28,7 @@ test('should navigate to the faqs page', async ({page}) => {
 
 test('should open home page', async ({page}) => {
   await page.goto('/about');
-  await page.getByAltText('Sum Of Us Logo').click();
+  await page.getByRole('link', { name: 'Sum Of Us home' }).click();
   await expect(page).toHaveTitle('Sum Of Us');
 });
 

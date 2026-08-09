@@ -4,7 +4,6 @@ import bigLogo from "../images/big-logo.svg";
 import communityPhoto from "../images/welcome-community.jpg";
 import beachPhoto from "../images/welcome-beach.jpg";
 import { styles } from "../styles";
-import { JoinUsBanner } from "../components/JoinUsBanner";
 
 export function Welcome() {
   return (
@@ -89,7 +88,6 @@ export function Welcome() {
             className={styles.welcome.featureImage}
           />
         </section>
-        <JoinUsBanner />
       </PageStack>
     </Page>
   );

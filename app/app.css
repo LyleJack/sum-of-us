@@ -622,7 +622,7 @@ body {
 
 .footer-social {
   position: absolute;
-  right: 10vh;
+  /*right: 10vh;*/
   color: var(--accent);
 }
 
@@ -637,7 +637,7 @@ body {
 .footer-logo {
   display: block;
   width: 100%;
-  margin-top: clamp(1.25rem, 2vw, 2rem);
+  margin-top: clamp(1.25rem, 7.5vw, 7rem);
   filter: brightness(0) saturate(100%) invert(93%) sepia(10%) saturate(329%) hue-rotate(319deg) brightness(107%) contrast(98%);
 }
 

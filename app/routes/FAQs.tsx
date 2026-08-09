@@ -1,5 +1,4 @@
 import { Page, PageStack } from "../components/UI";
-import { JoinUsBanner } from "../components/JoinUsBanner";
 import { styles } from "../styles";
 import { useState } from "react";
 
@@ -52,7 +51,7 @@ function Accordion() {
         const isOpen = openIndex === index;
         return (
           <div
-            key={index} 
+            key={index}
             className={`accordion-item ${isOpen ? "is-open" : ""}`}
           >
             <button className="accordion-header" type="button" onClick={() => toggleAccordion(index)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`}>
@@ -85,7 +84,6 @@ export default function FAQs() {
             <Accordion />
           </div>
         </section>
-        <JoinUsBanner />
       </PageStack>
     </Page>
   );

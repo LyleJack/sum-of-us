@@ -1,7 +1,6 @@
 import { Page, PageStack } from "../components/UI";
 import aboutPhoto from "../images/about_2.webp";
 import { styles } from "../styles";
-import { JoinUsBanner } from "../components/JoinUsBanner";
 import { PeopleCarousel } from "../components/PeopleCarousel";
 
 export default function About() {
@@ -40,7 +39,6 @@ export default function About() {
             </h2>
             <PeopleCarousel />
           </div>
-        <JoinUsBanner />
       </PageStack>
     </Page>
   );

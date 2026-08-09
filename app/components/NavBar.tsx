@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { useAuth } from "@clerk/clerk-react";
 import classicLogo from "../sum-of-us-logo.svg";
 import mobileLogo from "../images/mobileLogo.svg";
-import { useAuthModal } from "./AuthModal";
-import { UserMenu } from "./UserMenu";
 import { styles } from "../styles";
 
 export function NavBar() {
-  const { isLoaded, isSignedIn } = useAuth();
-  const { openAuthModal } = useAuthModal();
   const [isOpen, setIsOpen] = useState(false);
   const firstDrawerLink = useRef<HTMLAnchorElement>(null);
   const closeDrawer = () => setIsOpen(false);
@@ -44,9 +39,7 @@ export function NavBar() {
         </nav>
 
         <div className={styles.nav.desktopActions}>
-          {isLoaded && (isSignedIn ? <UserMenu /> : <button type="button" onClick={() => openAuthModal("login")} className={styles.nav.link}>Login</button>)}
-          <Link to="/booking" className={styles.button.primarySmall}>Book Now</Link>
-        </div>
+             </div>
 
         <button type="button" className={styles.nav.menuButton} onClick={() => setIsOpen((value) => !value)}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isOpen} aria-controls="mobile-navigation" />
@@ -63,10 +56,6 @@ export function NavBar() {
             <Link to="/classes" className={styles.nav.link} onClick={closeDrawer}>Classes</Link>
             <Link to="/faqs" className={styles.nav.link} onClick={closeDrawer}>FAQs</Link>
           </nav>
-          <div className={styles.nav.drawerActions}>
-            {isLoaded && (isSignedIn ? <UserMenu setNavBarShoudBeOpen={setIsOpen} /> : <button type="button" onClick={() => { openAuthModal("login"); closeDrawer(); }} className={styles.nav.link}>Login</button>)}
-            <Link to="/booking" className={styles.button.primarySmall} onClick={closeDrawer}>Book Now</Link>
-          </div>
         </aside>
       </>}
     </header>
