@@ -9,14 +9,21 @@
 		"not_found_handling": "single-page-application"
 	},
 	"d1_databases": [
+		// {
+		// 	"binding": "SUM_OF_US_DB",
+		// 	"database_name": "sum_of_us_db",
+		// 	"database_id": "96e0a3cb-041a-4eb7-9d2f-8249aac579b6",
+		// 	"remote": true
+		// },
 		{
-			"binding": "SUM_OF_US_DB",
-			"database_name": "sum_of_us_db",
-			"database_id": "96e0a3cb-041a-4eb7-9d2f-8249aac579b6",
+			"binding": "sou_db",
+			"database_name": "sou_db",
+			"database_id": "f1b63c34-e4a5-4c9d-a4d9-d9c37a254d4c",
 			"remote": true
 		}
 	],
 	"compatibility_flags": [
 		"nodejs_compat"
-	]
+	],
+	"main": "main.tsx"
 }
