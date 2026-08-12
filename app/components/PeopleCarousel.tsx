@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { styles } from "../styles";
-import portrait from "../images/about_2.webp";
+import Ryan from "../images/Ryan Sum of Us.jpg";
+import Marios from "../images/Marios Sum of Us.jpeg";
+import Anna from "../images/Anna Sum of Us.jpg";
+import Karen from "../images/Karen Sum of Us.jpg";
 
 type PersonCard = {
   name: string;
   role: string;
   bio: string;
+  bioExt: string;
   image: string;
 };
 
@@ -13,33 +17,32 @@ const peopleCards: PersonCard[] = [
   {
     name: "Marios",
     role: "Instructor",
-    bio: "Software engineer by daytime. Experienced self-defence instructor by night time. Glasgow resident. Extroverted introvert with a love for games, books, cooking and mocking his sister.",
-    image: portrait,
+    bio: "Marios has been training in various self defence systems and martial arts for over a decade now.",
+    bioExt: "He is a software engineer by day who comes with all the expected introversion but learned to act like an extrovert very well to blend it. He likes to cook, bake, read, write, run and games in all forms.",
+    image: Marios,
   },
   {
     name: "Ryan",
     role: "Instructor",
-    bio: "Software developer by daytime. A blend of Ireland and Manchester and full of dry humour. Self-defence instructor with over 10 years experience in the field. Addicted to late mornings and pastries.",
-    image: portrait,
+    bio: "Ryan has been training in various martial arts for over 20 years and has been instructing for more than 10. His favourite martial arts are Krav Maga and Brazilian Jujitsu.",
+    bioExt: "Outside of martial arts, Ryan enjoys climbing, boardgames, long lie-ins and exploring local bakeries.",
+    image: Ryan,
   },
   {
     name: "Anna",
     role: "Coordinator",
-    bio: "Also known as Sofia, goes by both her names. Brand designer, coffee addict, the personification of creative chaos.",
-    image: portrait,
+    bio: "Anna has her own brand design studio and helps build and grow Sum of Us in her spare time. She is passionate about helping people feel more confident and find their voice.",
+    bioExt: "Her other interests include reading (as many novels as possible) and discovering the best coffee spots in Glasgow.",
+    image: Anna,
   },
   {
-    name: "Bonus Person",
-    role: "Volunteer",
-    bio: "👀",
-    image: portrait,
+    name: "Karen",
+    role: "Trustee",
+    bio: "Karen has worked and volunteered in the charity sector for over 8 years, working in her local communities to support groups from all walks of life",
+    bioExt: "In her free time, Karen likes being in nature, reading fantasy novels and spending time with her cats.",
+    image: Karen,
   },
-   {
-    name: "Bonus Person 2",
-    role: "Volunteer",
-    bio: "👀👀👀\n just to demonstrate the scrolling/dragging",
-    image: portrait,
-  },
+
 ];
 
 export function PeopleCarousel() {
@@ -155,6 +158,8 @@ export function PeopleCarousel() {
               <p className={styles.about.peopleCardRole}>{person.role}</p>
               <h3 className={styles.about.peopleCardName}>{person.name}</h3>
               <p className={styles.about.peopleCardBio}>{person.bio}</p>
+              &nbsp;
+              <p className={styles.about.peopleCardBio}>{person.bioExt}</p>
             </div>
           </article>
         ))}
