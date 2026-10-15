@@ -39,9 +39,9 @@ export default function Classes() {
             </h2>
             <div>
               <p className={styles.classes.scheduleDetails}>
-                Tuesdays — 7pm<br />
-                Thursdays — 7pm<br />
-                Location: [venue TBC]
+                From November 4th, twice a week.<br />
+                Monday — 7pm at Partick Burgh Hall<br />
+                Thursday — 7pm at Kelvingrove Hall
               </p>
               <p className={styles.classes.scheduleNote}>
                 Just wear something comfortable*.
