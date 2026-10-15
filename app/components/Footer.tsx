@@ -8,13 +8,13 @@ export default function Footer() {
     return (
          <footer className={styles.footer.footer}>
           <div className={styles.footer.content}>
-            {/*<div className={styles.footer.venue}>
-              <p>Tuesdays &amp; Thursdays @ 7pm</p>
-              <p>Venue TBC</p>
-              <Link to="https://maps.app.goo.gl/gN7gxPzevTS3mrC57" target="_blank" rel="noopener noreferrer">
+            <div className={styles.footer.venue}>
+              <p>Monday — 6:30pm at Partick Burgh Hall</p>
+              <p>Thursday - 6:30pm at Kelvingrove Hall</p>
+                {/*<Link to="https://maps.app.goo.gl/gN7gxPzevTS3mrC57" target="_blank" rel="noopener noreferrer">
                 Show in maps
-              </Link>
-            </div>*/}
+              </Link>*/}
+            </div>
             <nav className={styles.footer.links} aria-label="Footer">
               <div className={styles.footer.social}>
 
