@@ -10,7 +10,7 @@ export default function Footer() {
           <div className={styles.footer.content}>
             <div className={styles.footer.venue}>
               <p>Monday — 6:30pm at Partick Burgh Hall</p>
-              <p>Wednesday - 6:30pm at Kelvingrove Hall</p>
+              <p>Wednesday — 6:30pm at Kelvingrove Hall</p>
                 {/*<Link to="https://maps.app.goo.gl/gN7gxPzevTS3mrC57" target="_blank" rel="noopener noreferrer">
                 Show in maps
               </Link>*/}
