@@ -40,8 +40,8 @@ export default function Classes() {
             <div>
               <p className={styles.classes.scheduleDetails}>
                 From November 4th, twice a week.<br />
-                Monday — 7pm at Partick Burgh Hall<br />
-                Thursday — 7pm at Kelvingrove Hall
+                Monday — 6:30pm at Partick Burgh Hall<br />
+                Thursday - 6:30pm at Kelvingrove Hall
               </p>
               <p className={styles.classes.scheduleNote}>
                 Just wear something comfortable*.
