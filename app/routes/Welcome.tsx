@@ -18,7 +18,7 @@ export function Welcome() {
             </p>
             <p>
               £5 per class | £35 monthly <br />
-              Tuesdays & Thursdays 7pm
+              Mondays & Wednesdays 6:30pm
             </p>
           </div>
           <img src={bigLogo} alt="Sum of Us" className={styles.welcome.classLogo} />
