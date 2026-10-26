@@ -14,6 +14,7 @@ export default function Footer() {
                 {/*<Link to="https://maps.app.goo.gl/gN7gxPzevTS3mrC57" target="_blank" rel="noopener noreferrer">
                 Show in maps
               </Link>*/}
+            <p  style={{ marginTop: "8px" }}>Any questions, feel free to contact us at <a href="mailto:hello@sumofus.co.uk?subject=Website Query">hello@sumofus.co.uk</a></p>
             </div>
             <nav className={styles.footer.links} aria-label="Footer">
               <div className={styles.footer.social}>

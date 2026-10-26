@@ -35,8 +35,10 @@ export function Welcome() {
               experience needed. No pressure. Just a fun way to meet new people
               and learn something along the way.
             </p>
-            <Link to="/booking" className={styles.welcome.textLink}>
-              Try your first class for free
+            <p>Try your first class for free!</p>
+            <Link to="https://docs.google.com/forms/d/e/1FAIpQLSdHANFf2Qqapr7fhUbOt42JB5XLSu41x1hKhHSp9WCj62U1Bg/viewform?usp=publish-editor" aria-label="Registration Form" target="_blank" rel="noopener noreferrer"  style={{ textDecoration: "underline", fontSize: "0.8em" }}>
+
+              Please complete this form before attending your first class!
             </Link>
           </div>
         </section>
